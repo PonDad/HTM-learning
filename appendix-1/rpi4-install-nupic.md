@@ -10,15 +10,21 @@ Refer to this site.
 
 Download the unofficial image from this link.
 
+![1-2](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-1/images/1-2.png?raw=true)
+
 [TheRemote / Ubuntu-Server-raspi4-unofficial](https://github.com/TheRemote/Ubuntu-Server-raspi4-unofficial/releases)
 
 flashing an SD card.
+
+![1-3](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-1/images/1-3.png?raw=true)
 
 [BalenaEtcher](https://www.balena.io/etcher/)
 
 ## Install NuPIC
 
 Refer to this forum.
+
+![1-4](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-1/images/1-4.png?raw=true)
 
 [NuPIC on Raspberry Pi 2(rev 1.2)/ 3B/ B+ with Xubuntu - HTM FORUM](https://discourse.numenta.org/t/nupic-on-raspberry-pi-2-rev-1-2-3b-b-with-xubuntu/4550)
 
