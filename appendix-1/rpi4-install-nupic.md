@@ -6,8 +6,6 @@ NuPIC on RaspberryPi.
 
 Refer to this site.
 
-![1-2](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-1/images/1-2.png?raw=true)
-
 [Raspberry Pi 4 Ubuntu Server / Desktop 18.04.4 Image (unofficial) - James A. Chambers Legendary Technology Blog](https://jamesachambers.com/raspberry-pi-4-ubuntu-server-desktop-18-04-3-image-unofficial/)
 
 Download the unofficial image from this link.
@@ -16,15 +14,21 @@ Download the unofficial image from this link.
 
 flashing an SD card.
 
-![1-3](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-1/images/1-3.png?raw=true)
-
 [BalenaEtcher](https://www.balena.io/etcher/)
+
+Enable Ethanet Network.
+
+[Ubuntuで有線LANで接続しようとしても、「デバイスは管理されていません」と出てしまう時の簡単な解決法](https://www.nemotos.net/?p=3123)
+
+```bash
+$ cd /etc/NetworkManager/conf.d
+$ sudo touch 10-globally-managed-devices.conf
+$ sudo service network-manager restart
+```
 
 ## Install NuPIC
 
 Refer to this forum.
-
-![1-4](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-1/images/1-4.png?raw=true)
 
 [NuPIC on Raspberry Pi 2(rev 1.2)/ 3B/ B+ with Xubuntu - HTM FORUM](https://discourse.numenta.org/t/nupic-on-raspberry-pi-2-rev-1-2-3b-b-with-xubuntu/4550)
 
@@ -43,11 +47,41 @@ And add “noexcept(false)” to line 62:
 You should be able to run the sample code.
 
 ```bash
-$ python /nupic/examples/sp/hello_sp.py
+$ python nupic/examples/sp/hello_sp.py
 ```
 
 ## Install Libraries
 
 How to install a library that gives an installation error.
 
-test test
+**matplotlib**
+
+`sudo apt install python-matplotlib` installation error.
+
+```bash
+$ sudo apt install libfreetype6-dev pkg-config
+$ sudo pip install matplotlib
+```
+
+**scipy**
+
+`sudo apt install python-scipy` installation error.
+`sudo pip install scipy` installation error.
+
+numpy==1.12.1 --> scipy==0.19.0
+
+`sudo pip install scipy==0.19.0` installation error.
+
+[stackoverflow](https://stackoverflow.com/questions/26575587/cant-install-scipy-through-pip)
+
+```bash
+$ sudo apt install libatlas-base-dev gfortran
+$ sudo pip install scipy==0.19.0
+```
+
+**jupyter notebook**
+
+```bash
+$ sudo apt install jupyter-core
+$ sudo apt install jupyter-notebook
+```
