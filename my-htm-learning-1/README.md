@@ -1,4 +1,4 @@
-## [my-htm-learning-1](https://github.com/PonDad/My-HTM-learning/tree/master/my-htm-learning-1)
+# my-htm-learning-1
 
 Create a sound file.
 
