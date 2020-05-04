@@ -12,6 +12,10 @@ Download the unofficial image from this link.
 
 [TheRemote / Ubuntu-Server-raspi4-unofficial](https://github.com/TheRemote/Ubuntu-Server-raspi4-unofficial/releases)
 
+flashing an SD card.
+
+[BalenaEtcher](https://www.balena.io/etcher/)
+
 ## Install NuPIC
 
 Refer to this forum.
