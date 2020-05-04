@@ -1,5 +1,7 @@
-# HTM learning
+# My HTM learning
 
-## htm-learning-1
+## my-htm-learning-1
 
-HTM learns the music.
+The HTM application learns and predicts music.
+
+![1-1](images/1-1.png)
