@@ -6,11 +6,11 @@ NuPIC on RaspberryPi.
 
 Refer to this site.
 
+![1-2](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-1/images/1-2.png?raw=true)
+
 [Raspberry Pi 4 Ubuntu Server / Desktop 18.04.4 Image (unofficial) - James A. Chambers Legendary Technology Blog](https://jamesachambers.com/raspberry-pi-4-ubuntu-server-desktop-18-04-3-image-unofficial/)
 
 Download the unofficial image from this link.
-
-![1-2](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-1/images/1-2.png?raw=true)
 
 [TheRemote / Ubuntu-Server-raspi4-unofficial](https://github.com/TheRemote/Ubuntu-Server-raspi4-unofficial/releases)
 
