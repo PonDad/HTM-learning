@@ -40,3 +40,4 @@ $ python /nupic/examples/sp/hello_sp.py
 
 How to install a library that gives an installation error.
 
+test
