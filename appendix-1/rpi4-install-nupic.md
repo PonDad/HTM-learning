@@ -66,9 +66,10 @@ $ sudo pip install matplotlib
 **scipy**
 
 `sudo apt install python-scipy` installation error.
+
 `sudo pip install scipy` installation error.
 
-numpy==1.12.1 --> scipy==0.19.0
+`numpy==1.12.1` need--> `scipy==0.19.0`
 
 `sudo pip install scipy==0.19.0` installation error.
 
