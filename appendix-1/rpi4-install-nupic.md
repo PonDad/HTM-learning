@@ -2,7 +2,7 @@
 
 NuPIC on RaspberryPi.
 
-## Preinstalled Image Download and Install
+## Preinstalled Image Download and Burn
 
 Refer to this site.
 
