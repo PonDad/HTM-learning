@@ -12,13 +12,13 @@ Download the unofficial image from this link.
 
 [TheRemote / Ubuntu-Server-raspi4-unofficial](https://github.com/TheRemote/Ubuntu-Server-raspi4-unofficial/releases)
 
-flashing an SD card.
+flashing an 32GB SD card.
 
 [BalenaEtcher](https://www.balena.io/etcher/)
 
 Enable Ethanet Network.
 
-[Ubuntuで有線LANで接続しようとしても、「デバイスは管理されていません」と出てしまう時の簡単な解決法](https://www.nemotos.net/?p=3123)
+[Ubuntuで有線LANで接続しようとしても](https://www.nemotos.net/?p=3123)
 
 ```bash
 $ cd /etc/NetworkManager/conf.d

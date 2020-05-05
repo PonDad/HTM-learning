@@ -2,4 +2,4 @@
 
 How to install htm.core on RaspberryPi.
 
-![1-1](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-1/images/1-1.png?raw=true)
+![1-1](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-2/images/1-1.png?raw=true)

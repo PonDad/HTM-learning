@@ -12,7 +12,7 @@ Download the unofficial image from this link.
 
 [TheRemote/Ubuntu-Server-raspi4-unofficial](https://github.com/TheRemote/Ubuntu-Server-raspi4-unofficial/releases)
 
-flashing an SD card.
+flashing an 32GB SD card.
 
 [BalenaEtcher](https://www.balena.io/etcher/)
 
@@ -33,6 +33,8 @@ Refer to offical repository.
 [htm-community/htm.core](https://github.com/htm-community/htm.core)
 
 **`.bashrc`**
+
+![1-2](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-2/images/1-1.png?raw=true)
 
 add `export ARCHFLAGS="-arch arm64"` to the `.bashrc` file.
 
