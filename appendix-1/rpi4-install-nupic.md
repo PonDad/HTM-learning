@@ -30,7 +30,7 @@ $ sudo service network-manager restart
 
 Refer to this forum.
 
-[NuPIC on Raspberry Pi 2(rev 1.2)/ 3B/ B+ with Xubuntu - HTM FORUM](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-2/images/1-2.png?raw=true)
+[NuPIC on Raspberry Pi 2(rev 1.2)/ 3B/ B+ with Xubuntu - HTM FORUM](https://discourse.numenta.org/t/nupic-on-raspberry-pi-2-rev-1-2-3b-b-with-xubuntu/4550)
 
 If you work with this reference, you can install it.
 

@@ -34,7 +34,7 @@ Refer to offical repository.
 
 **`.bashrc`**
 
-![1-2](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-2/images/1-1.png?raw=true)
+![1-2](https://github.com/PonDad/My-HTM-learning/blob/master/appendix-2/images/1-2.png?raw=true)
 
 add `export ARCHFLAGS="-arch arm64"` to the `.bashrc` file.
 
