@@ -1,0 +1,802 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module htm.bindings.sdr</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="htm.html"><font color="#ffffff">htm</font></a>.<a href="htm.bindings.html"><font color="#ffffff">bindings</font></a>.sdr</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/usr/local/lib/python3.7/site-packages/htm.core-2.1.1-py3.7-macosx-10.14-x86_64.egg/htm/bindings/sdr.cpython-37m-darwin.so">/usr/local/lib/python3.7/site-packages/htm.core-2.1.1-py3.7-macosx-10.14-x86_64.egg/htm/bindings/sdr.cpython-37m-darwin.so</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial">pybind11_builtins.pybind11_object(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="htm.bindings.sdr.html#Metrics">Metrics</a>
+</font></dt><dt><font face="helvetica, arial"><a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="htm.bindings.sdr.html#ActivationFrequency">ActivationFrequency</a>
+</font></dt><dt><font face="helvetica, arial"><a href="htm.bindings.sdr.html#Overlap">Overlap</a>
+</font></dt><dt><font face="helvetica, arial"><a href="htm.bindings.sdr.html#Sparsity">Sparsity</a>
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="htm.bindings.sdr.html#SDR">SDR</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="ActivationFrequency">class <strong>ActivationFrequency</strong></a>(<a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Measures&nbsp;the&nbsp;activation&nbsp;frequency&nbsp;of&nbsp;each&nbsp;value&nbsp;in&nbsp;an&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;accumulates<br>
+measurements&nbsp;using&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average,&nbsp;and&nbsp;outputs&nbsp;a&nbsp;summary&nbsp;of<br>
+results.<br>
+&nbsp;<br>
+Activation&nbsp;frequencies&nbsp;are&nbsp;Real&nbsp;numbers&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,&nbsp;1],&nbsp;where&nbsp;zero<br>
+indicates&nbsp;never&nbsp;active,&nbsp;and&nbsp;one&nbsp;indicates&nbsp;always&nbsp;active.<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;2&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;=&nbsp;<a href="#ActivationFrequency">ActivationFrequency</a>(&nbsp;A,&nbsp;period&nbsp;=&nbsp;1000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.dense&nbsp;=&nbsp;[0,&nbsp;0]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.dense&nbsp;=&nbsp;[0,&nbsp;1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.dense&nbsp;=&nbsp;[1,&nbsp;1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.activationFrequency&nbsp;-&gt;&nbsp;{&nbsp;0.33,&nbsp;0.66&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#ActivationFrequency-min">min</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;1/3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#ActivationFrequency-max">max</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;2/3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#ActivationFrequency-mean">mean</a>()&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;1/2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#ActivationFrequency-std">std</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;~0.16<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#ActivationFrequency-entropy">entropy</a>()&nbsp;-&gt;&nbsp;~0.92<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str(B)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;Activation&nbsp;Frequency&nbsp;Min/Mean/Std/Max&nbsp;0.333333&nbsp;/&nbsp;0.5&nbsp;/&nbsp;0.166667&nbsp;/&nbsp;0.666667<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entropy&nbsp;0.918296<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="htm.bindings.sdr.html#ActivationFrequency">ActivationFrequency</a></dd>
+<dd><a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a></dd>
+<dd>pybind11_builtins.pybind11_object</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActivationFrequency-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt><a href="#ActivationFrequency-__init__">__init__</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#ActivationFrequency-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#ActivationFrequency">ActivationFrequency</a>,&nbsp;sdr:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;period:&nbsp;int,&nbsp;initialValue:&nbsp;float&nbsp;=&nbsp;-1)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source&nbsp;to&nbsp;track.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;<a href="#ActivationFrequency">ActivationFrequency</a><br>
+instance&nbsp;by&nbsp;assigning&nbsp;to&nbsp;this&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.<br>
+&nbsp;<br>
+Argument&nbsp;initialValue&nbsp;is&nbsp;Optional.&nbsp;&nbsp;Makes&nbsp;this&nbsp;<a href="#ActivationFrequency">ActivationFrequency</a>&nbsp;instance<br>
+think&nbsp;that&nbsp;it&nbsp;is&nbsp;the&nbsp;result&nbsp;of&nbsp;a&nbsp;long&nbsp;running&nbsp;process&nbsp;(even&nbsp;though&nbsp;it&nbsp;was&nbsp;just<br>
+created).&nbsp;&nbsp;This&nbsp;assigns&nbsp;an&nbsp;initial&nbsp;activation&nbsp;frequency&nbsp;to&nbsp;all&nbsp;bits&nbsp;in&nbsp;the&nbsp;<a href="#SDR">SDR</a>,<br>
+and&nbsp;causes&nbsp;it&nbsp;to&nbsp;always&nbsp;use&nbsp;the&nbsp;exponential&nbsp;moving&nbsp;average&nbsp;instead&nbsp;of&nbsp;the<br>
+regular&nbsp;average&nbsp;which&nbsp;is&nbsp;usually&nbsp;applied&nbsp;to&nbsp;the&nbsp;first&nbsp;"period"&nbsp;many&nbsp;samples.<br>
+&nbsp;<br>
+Note:&nbsp;This&nbsp;argument&nbsp;is&nbsp;useful&nbsp;for&nbsp;using&nbsp;this&nbsp;metric&nbsp;as&nbsp;part&nbsp;of&nbsp;boosting<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;algorithms&nbsp;which&nbsp;seek&nbsp;to&nbsp;push&nbsp;the&nbsp;activation&nbsp;frequencies&nbsp;to&nbsp;a&nbsp;target<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value.&nbsp;These&nbsp;algorithms&nbsp;will&nbsp;overreact&nbsp;to&nbsp;the&nbsp;default&nbsp;early&nbsp;behavior&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;class&nbsp;during&nbsp;the&nbsp;first&nbsp;"period"&nbsp;many&nbsp;samples.<br>
+&nbsp;<br>
+&nbsp;<br>
+2.&nbsp;<a href="#ActivationFrequency-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#ActivationFrequency">ActivationFrequency</a>,&nbsp;dimensions:&nbsp;List[int],&nbsp;period:&nbsp;int,&nbsp;initialValue:&nbsp;float&nbsp;=&nbsp;-1)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;dimensions&nbsp;of&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;<a href="#ActivationFrequency">ActivationFrequency</a><br>
+instance&nbsp;by&nbsp;calling&nbsp;method&nbsp;af.<a href="#ActivationFrequency-addData">addData</a>(&nbsp;<a href="#SDR">SDR</a>&nbsp;)&nbsp;with&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;which&nbsp;has<br>
+these&nbsp;dimensions.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt><a href="#ActivationFrequency-__str__">__str__</a>(self:&nbsp;htm.bindings.sdr.<a href="#ActivationFrequency">ActivationFrequency</a>)&nbsp;-&gt;&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-entropy"><strong>entropy</strong></a>(...)</dt><dd><tt><a href="#ActivationFrequency-entropy">entropy</a>(self:&nbsp;htm.bindings.sdr.<a href="#ActivationFrequency">ActivationFrequency</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Binary&nbsp;entropy&nbsp;is&nbsp;a&nbsp;measurement&nbsp;of&nbsp;information.&nbsp;&nbsp;It&nbsp;measures&nbsp;how&nbsp;well&nbsp;the<br>
+<a href="#SDR">SDR</a>&nbsp;utilizes&nbsp;its&nbsp;resources&nbsp;(bits).&nbsp;&nbsp;A&nbsp;low&nbsp;entropy&nbsp;indicates&nbsp;that&nbsp;many<br>
+bits&nbsp;in&nbsp;the&nbsp;<a href="#SDR">SDR</a>&nbsp;are&nbsp;under-utilized&nbsp;and&nbsp;do&nbsp;not&nbsp;transmit&nbsp;as&nbsp;much<br>
+information&nbsp;as&nbsp;they&nbsp;could.&nbsp;&nbsp;A&nbsp;high&nbsp;entropy&nbsp;indicates&nbsp;that&nbsp;the&nbsp;<a href="#SDR">SDR</a><br>
+optimally&nbsp;utilizes&nbsp;its&nbsp;resources.&nbsp;&nbsp;The&nbsp;most&nbsp;optimal&nbsp;use&nbsp;of&nbsp;<a href="#SDR">SDR</a>&nbsp;resources<br>
+is&nbsp;when&nbsp;all&nbsp;bits&nbsp;have&nbsp;an&nbsp;equal&nbsp;activation&nbsp;frequency.&nbsp;&nbsp;For&nbsp;convenience,<br>
+the&nbsp;entropy&nbsp;is&nbsp;scaled&nbsp;by&nbsp;the&nbsp;theoretical&nbsp;maximum&nbsp;into&nbsp;the&nbsp;range&nbsp;[0,&nbsp;1].<br>
+&nbsp;<br>
+Returns&nbsp;binary&nbsp;entropy&nbsp;of&nbsp;<a href="#SDR">SDR</a>,&nbsp;scaled&nbsp;to&nbsp;range&nbsp;[0,&nbsp;1].</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-max"><strong>max</strong></a>(...)</dt><dd><tt><a href="#ActivationFrequency-max">max</a>(self:&nbsp;htm.bindings.sdr.<a href="#ActivationFrequency">ActivationFrequency</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Maximum&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-mean"><strong>mean</strong></a>(...)</dt><dd><tt><a href="#ActivationFrequency-mean">mean</a>(self:&nbsp;htm.bindings.sdr.<a href="#ActivationFrequency">ActivationFrequency</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Average&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-min"><strong>min</strong></a>(...)</dt><dd><tt><a href="#ActivationFrequency-min">min</a>(self:&nbsp;htm.bindings.sdr.<a href="#ActivationFrequency">ActivationFrequency</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Minimum&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-std"><strong>std</strong></a>(...)</dt><dd><tt><a href="#ActivationFrequency-std">std</a>(self:&nbsp;htm.bindings.sdr.<a href="#ActivationFrequency">ActivationFrequency</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Standard&nbsp;Deviation&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>activationFrequency</strong></dt>
+<dd><tt>Data&nbsp;Buffer&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><a name="ActivationFrequency-addData"><strong>addData</strong></a>(...)</dt><dd><tt><a href="#ActivationFrequency-addData">addData</a>(self:&nbsp;htm.bindings.sdr.<a href="#MetricsHelper_">MetricsHelper_</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Add&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;datum&nbsp;to&nbsp;this&nbsp;Metric.&nbsp;&nbsp;This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;called&nbsp;if&nbsp;the<br>
+Metric&nbsp;was&nbsp;constructed&nbsp;with&nbsp;dimensions&nbsp;and&nbsp;NOT&nbsp;an&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source,&nbsp;its&nbsp;dimensions&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;this&nbsp;Metric's<br>
+dimensions.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><strong>dimensions</strong></dt>
+<dd><tt>Shape&nbsp;of&nbsp;the&nbsp;SDR&nbsp;data&nbsp;source.</tt></dd>
+</dl>
+<dl><dt><strong>period</strong></dt>
+<dd><tt>Time&nbsp;constant&nbsp;for&nbsp;the&nbsp;exponential&nbsp;moving&nbsp;average&nbsp;which&nbsp;incorporate&nbsp;data&nbsp;into<br>
+this&nbsp;measurement.&nbsp;&nbsp;If&nbsp;there&nbsp;are&nbsp;fewer&nbsp;data&nbsp;samples&nbsp;than&nbsp;the&nbsp;period&nbsp;then&nbsp;a&nbsp;regular<br>
+average&nbsp;is&nbsp;used&nbsp;instead&nbsp;of&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd>
+</dl>
+<dl><dt><strong>samples</strong></dt>
+<dd><tt>Number&nbsp;of&nbsp;data&nbsp;samples&nbsp;received&nbsp;&amp;&nbsp;incorporated&nbsp;into&nbsp;this&nbsp;measurement.</tt></dd>
+</dl>
+<hr>
+Static methods inherited from pybind11_builtins.pybind11_object:<br>
+<dl><dt><a name="ActivationFrequency-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from pybind11_builtins.pybind11_type</font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Metrics">class <strong>Metrics</strong></a>(pybind11_builtins.pybind11_object)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Measures&nbsp;an&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;applies&nbsp;the&nbsp;following&nbsp;three&nbsp;metrics:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Sparsity">Sparsity</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#ActivationFrequency">ActivationFrequency</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Overlap">Overlap</a><br>
+This&nbsp;accumulates&nbsp;measurements&nbsp;using&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average,&nbsp;and<br>
+outputs&nbsp;a&nbsp;summary&nbsp;of&nbsp;results.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;dimensions&nbsp;=&nbsp;2000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;M&nbsp;=&nbsp;<a href="#Metrics">Metrics</a>(&nbsp;A,&nbsp;period&nbsp;=&nbsp;1000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.randomize(&nbsp;0.10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(&nbsp;20&nbsp;):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A.addNoise(&nbsp;0.55&nbsp;)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;M.sparsity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;<a href="#Sparsity">Sparsity</a>&nbsp;class&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;M.activationFrequency&nbsp;-&gt;&nbsp;<a href="#ActivationFrequency">ActivationFrequency</a>&nbsp;class&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;M.overlap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;<a href="#Overlap">Overlap</a>&nbsp;class&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str(M)&nbsp;-&gt;&nbsp;<a href="#SDR">SDR</a>(&nbsp;2000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Sparsity">Sparsity</a>&nbsp;Min/Mean/Std/Max&nbsp;0.1&nbsp;/&nbsp;0.1&nbsp;/&nbsp;0&nbsp;/&nbsp;0.1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activation&nbsp;Frequency&nbsp;Min/Mean/Std/Max&nbsp;0&nbsp;/&nbsp;0.1&nbsp;/&nbsp;0.100464&nbsp;/&nbsp;0.666667<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entropy&nbsp;0.822222<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Overlap">Overlap</a>&nbsp;Min/Mean/Std/Max&nbsp;0.45&nbsp;/&nbsp;0.45&nbsp;/&nbsp;0&nbsp;/&nbsp;0.45<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="htm.bindings.sdr.html#Metrics">Metrics</a></dd>
+<dd>pybind11_builtins.pybind11_object</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Metrics-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt><a href="#Metrics-__init__">__init__</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#Metrics-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#Metrics">Metrics</a>,&nbsp;sdr:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source&nbsp;to&nbsp;track.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;<a href="#Metrics">Metrics</a>&nbsp;instance<br>
+by&nbsp;assigning&nbsp;to&nbsp;this&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.<br>
+&nbsp;<br>
+2.&nbsp;<a href="#Metrics-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#Metrics">Metrics</a>,&nbsp;dimensions:&nbsp;List[int],&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;dimensions&nbsp;of&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;<a href="#Metrics">Metrics</a>&nbsp;instance<br>
+by&nbsp;calling&nbsp;method&nbsp;metrics.<a href="#Metrics-addData">addData</a>(&nbsp;<a href="#SDR">SDR</a>&nbsp;)&nbsp;with&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;which&nbsp;has&nbsp;these&nbsp;dimensions.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd></dl>
+
+<dl><dt><a name="Metrics-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt><a href="#Metrics-__str__">__str__</a>(self:&nbsp;htm.bindings.sdr.<a href="#Metrics">Metrics</a>)&nbsp;-&gt;&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Metrics-addData"><strong>addData</strong></a>(...)</dt><dd><tt><a href="#Metrics-addData">addData</a>(self:&nbsp;htm.bindings.sdr.<a href="#Metrics">Metrics</a>,&nbsp;sdr:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Add&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;datum&nbsp;to&nbsp;these&nbsp;<a href="#Metrics">Metrics</a>.&nbsp;&nbsp;This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;called&nbsp;if<br>
+<a href="#Metrics">Metrics</a>&nbsp;was&nbsp;constructed&nbsp;with&nbsp;dimensions&nbsp;and&nbsp;NOT&nbsp;an&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source,&nbsp;its&nbsp;dimensions&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;this&nbsp;Metric's<br>
+dimensions.</tt></dd></dl>
+
+<dl><dt><a name="Metrics-reset"><strong>reset</strong></a>(...)</dt><dd><tt><a href="#Metrics-reset">reset</a>(self:&nbsp;htm.bindings.sdr.<a href="#Metrics">Metrics</a>)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+For&nbsp;use&nbsp;with&nbsp;time-series&nbsp;data&nbsp;sets.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>activationFrequency</strong></dt>
+<dd><tt></tt></dd>
+</dl>
+<dl><dt><strong>dimensions</strong></dt>
+<dd><tt></tt></dd>
+</dl>
+<dl><dt><strong>overlap</strong></dt>
+<dd><tt></tt></dd>
+</dl>
+<dl><dt><strong>sparsity</strong></dt>
+<dd><tt></tt></dd>
+</dl>
+<hr>
+Static methods inherited from pybind11_builtins.pybind11_object:<br>
+<dl><dt><a name="Metrics-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from pybind11_builtins.pybind11_type</font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="MetricsHelper_">class <strong>MetricsHelper_</strong></a>(pybind11_builtins.pybind11_object)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a></dd>
+<dd>pybind11_builtins.pybind11_object</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="MetricsHelper_-__init__"><strong>__init__</strong></a>(self, /, *args, **kwargs)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="MetricsHelper_-addData"><strong>addData</strong></a>(...)</dt><dd><tt><a href="#MetricsHelper_-addData">addData</a>(self:&nbsp;htm.bindings.sdr.<a href="#MetricsHelper_">MetricsHelper_</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Add&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;datum&nbsp;to&nbsp;this&nbsp;Metric.&nbsp;&nbsp;This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;called&nbsp;if&nbsp;the<br>
+Metric&nbsp;was&nbsp;constructed&nbsp;with&nbsp;dimensions&nbsp;and&nbsp;NOT&nbsp;an&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source,&nbsp;its&nbsp;dimensions&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;this&nbsp;Metric's<br>
+dimensions.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>dimensions</strong></dt>
+<dd><tt>Shape&nbsp;of&nbsp;the&nbsp;SDR&nbsp;data&nbsp;source.</tt></dd>
+</dl>
+<dl><dt><strong>period</strong></dt>
+<dd><tt>Time&nbsp;constant&nbsp;for&nbsp;the&nbsp;exponential&nbsp;moving&nbsp;average&nbsp;which&nbsp;incorporate&nbsp;data&nbsp;into<br>
+this&nbsp;measurement.&nbsp;&nbsp;If&nbsp;there&nbsp;are&nbsp;fewer&nbsp;data&nbsp;samples&nbsp;than&nbsp;the&nbsp;period&nbsp;then&nbsp;a&nbsp;regular<br>
+average&nbsp;is&nbsp;used&nbsp;instead&nbsp;of&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd>
+</dl>
+<dl><dt><strong>samples</strong></dt>
+<dd><tt>Number&nbsp;of&nbsp;data&nbsp;samples&nbsp;received&nbsp;&amp;&nbsp;incorporated&nbsp;into&nbsp;this&nbsp;measurement.</tt></dd>
+</dl>
+<hr>
+Static methods inherited from pybind11_builtins.pybind11_object:<br>
+<dl><dt><a name="MetricsHelper_-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from pybind11_builtins.pybind11_type</font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Overlap">class <strong>Overlap</strong></a>(<a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Measures&nbsp;the&nbsp;overlap&nbsp;between&nbsp;successive&nbsp;assignments&nbsp;to&nbsp;an&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;class<br>
+accumulates&nbsp;measurements&nbsp;using&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average,&nbsp;and&nbsp;outputs&nbsp;a<br>
+summary&nbsp;of&nbsp;results.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;normalizes&nbsp;the&nbsp;overlap&nbsp;into&nbsp;the&nbsp;range&nbsp;[0,&nbsp;1]&nbsp;by&nbsp;dividing&nbsp;by&nbsp;the<br>
+number&nbsp;of&nbsp;active&nbsp;values.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;dimensions&nbsp;=&nbsp;1000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;=&nbsp;<a href="#Overlap">Overlap</a>(&nbsp;A,&nbsp;period&nbsp;=&nbsp;1000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.randomize(&nbsp;0.20&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.addNoise(&nbsp;0.95&nbsp;)&nbsp;&nbsp;-&gt;&nbsp;&nbsp;5%&nbsp;overlap<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.addNoise(&nbsp;0.55&nbsp;)&nbsp;&nbsp;-&gt;&nbsp;45%&nbsp;overlap<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.addNoise(&nbsp;0.72&nbsp;)&nbsp;&nbsp;-&gt;&nbsp;28%&nbsp;overlap<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.overlap&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.28<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#Overlap-min">min</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.05<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#Overlap-max">max</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.45<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#Overlap-mean">mean</a>()&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.26<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#Overlap-std">std</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;~0.16<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str(B)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;<a href="#Overlap">Overlap</a>&nbsp;Min/Mean/Std/Max&nbsp;0.05&nbsp;/&nbsp;0.260016&nbsp;/&nbsp;0.16389&nbsp;/&nbsp;0.45<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="htm.bindings.sdr.html#Overlap">Overlap</a></dd>
+<dd><a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a></dd>
+<dd>pybind11_builtins.pybind11_object</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Overlap-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt><a href="#Overlap-__init__">__init__</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#Overlap-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#Overlap">Overlap</a>,&nbsp;sdr:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source&nbsp;to&nbsp;track.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;<a href="#Overlap">Overlap</a>&nbsp;instance<br>
+by&nbsp;assigning&nbsp;to&nbsp;this&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.<br>
+&nbsp;<br>
+2.&nbsp;<a href="#Overlap-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#Overlap">Overlap</a>,&nbsp;dimensions:&nbsp;List[int],&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;dimensions&nbsp;of&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;<a href="#Overlap">Overlap</a>&nbsp;instance<br>
+by&nbsp;calling&nbsp;method&nbsp;overlap.<a href="#Overlap-addData">addData</a>(&nbsp;<a href="#SDR">SDR</a>&nbsp;)&nbsp;with&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;which&nbsp;has&nbsp;these&nbsp;dimensions.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd></dl>
+
+<dl><dt><a name="Overlap-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt><a href="#Overlap-__str__">__str__</a>(self:&nbsp;htm.bindings.sdr.<a href="#Overlap">Overlap</a>)&nbsp;-&gt;&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Overlap-max"><strong>max</strong></a>(...)</dt><dd><tt><a href="#Overlap-max">max</a>(self:&nbsp;htm.bindings.sdr.<a href="#Overlap">Overlap</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Maximum&nbsp;<a href="#Overlap">Overlap</a></tt></dd></dl>
+
+<dl><dt><a name="Overlap-mean"><strong>mean</strong></a>(...)</dt><dd><tt><a href="#Overlap-mean">mean</a>(self:&nbsp;htm.bindings.sdr.<a href="#Overlap">Overlap</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Average&nbsp;<a href="#Overlap">Overlap</a></tt></dd></dl>
+
+<dl><dt><a name="Overlap-min"><strong>min</strong></a>(...)</dt><dd><tt><a href="#Overlap-min">min</a>(self:&nbsp;htm.bindings.sdr.<a href="#Overlap">Overlap</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Minimum&nbsp;<a href="#Overlap">Overlap</a></tt></dd></dl>
+
+<dl><dt><a name="Overlap-reset"><strong>reset</strong></a>(...)</dt><dd><tt><a href="#Overlap-reset">reset</a>(self:&nbsp;htm.bindings.sdr.<a href="#Overlap">Overlap</a>)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+For&nbsp;use&nbsp;with&nbsp;time-series&nbsp;data&nbsp;sets.</tt></dd></dl>
+
+<dl><dt><a name="Overlap-std"><strong>std</strong></a>(...)</dt><dd><tt><a href="#Overlap-std">std</a>(self:&nbsp;htm.bindings.sdr.<a href="#Overlap">Overlap</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Standard&nbsp;Deviation&nbsp;of&nbsp;<a href="#Overlap">Overlap</a></tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>overlap</strong></dt>
+<dd><tt>Overlap&nbsp;between&nbsp;the&nbsp;two&nbsp;most&nbsp;recently&nbsp;added&nbsp;SDRs.</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><a name="Overlap-addData"><strong>addData</strong></a>(...)</dt><dd><tt><a href="#Overlap-addData">addData</a>(self:&nbsp;htm.bindings.sdr.<a href="#MetricsHelper_">MetricsHelper_</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Add&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;datum&nbsp;to&nbsp;this&nbsp;Metric.&nbsp;&nbsp;This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;called&nbsp;if&nbsp;the<br>
+Metric&nbsp;was&nbsp;constructed&nbsp;with&nbsp;dimensions&nbsp;and&nbsp;NOT&nbsp;an&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source,&nbsp;its&nbsp;dimensions&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;this&nbsp;Metric's<br>
+dimensions.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><strong>dimensions</strong></dt>
+<dd><tt>Shape&nbsp;of&nbsp;the&nbsp;SDR&nbsp;data&nbsp;source.</tt></dd>
+</dl>
+<dl><dt><strong>period</strong></dt>
+<dd><tt>Time&nbsp;constant&nbsp;for&nbsp;the&nbsp;exponential&nbsp;moving&nbsp;average&nbsp;which&nbsp;incorporate&nbsp;data&nbsp;into<br>
+this&nbsp;measurement.&nbsp;&nbsp;If&nbsp;there&nbsp;are&nbsp;fewer&nbsp;data&nbsp;samples&nbsp;than&nbsp;the&nbsp;period&nbsp;then&nbsp;a&nbsp;regular<br>
+average&nbsp;is&nbsp;used&nbsp;instead&nbsp;of&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd>
+</dl>
+<dl><dt><strong>samples</strong></dt>
+<dd><tt>Number&nbsp;of&nbsp;data&nbsp;samples&nbsp;received&nbsp;&amp;&nbsp;incorporated&nbsp;into&nbsp;this&nbsp;measurement.</tt></dd>
+</dl>
+<hr>
+Static methods inherited from pybind11_builtins.pybind11_object:<br>
+<dl><dt><a name="Overlap-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from pybind11_builtins.pybind11_type</font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SDR">class <strong>SDR</strong></a>(pybind11_builtins.pybind11_object)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Sparse&nbsp;Distributed&nbsp;Representation<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;manages&nbsp;the&nbsp;specification&nbsp;and&nbsp;momentary&nbsp;value&nbsp;of&nbsp;a&nbsp;Sparse&nbsp;Distributed<br>
+Representation&nbsp;(<a href="#SDR">SDR</a>).&nbsp;&nbsp;An&nbsp;<a href="#SDR">SDR</a>&nbsp;is&nbsp;a&nbsp;group&nbsp;of&nbsp;boolean&nbsp;values&nbsp;which&nbsp;represent&nbsp;the<br>
+state&nbsp;of&nbsp;a&nbsp;group&nbsp;of&nbsp;neurons&nbsp;or&nbsp;their&nbsp;associated&nbsp;processes.<br>
+&nbsp;<br>
+<a href="#SDR">SDR</a>'s&nbsp;have&nbsp;three&nbsp;commonly&nbsp;used&nbsp;data&nbsp;formats&nbsp;which&nbsp;are:<br>
+*&nbsp;&nbsp;&nbsp;dense<br>
+*&nbsp;&nbsp;&nbsp;sparse<br>
+*&nbsp;&nbsp;&nbsp;coordinates<br>
+The&nbsp;<a href="#SDR">SDR</a>&nbsp;class&nbsp;has&nbsp;three&nbsp;magic&nbsp;properties,&nbsp;one&nbsp;for&nbsp;each&nbsp;of&nbsp;these&nbsp;data&nbsp;formats.<br>
+These&nbsp;properties&nbsp;are&nbsp;the&nbsp;primary&nbsp;way&nbsp;of&nbsp;accessing&nbsp;the&nbsp;<a href="#SDR">SDR</a>'s&nbsp;data.&nbsp;&nbsp;When&nbsp;these<br>
+properties&nbsp;are&nbsp;read&nbsp;from,&nbsp;the&nbsp;data&nbsp;is&nbsp;automatically&nbsp;converted&nbsp;to&nbsp;the&nbsp;requested<br>
+format&nbsp;and&nbsp;is&nbsp;cached&nbsp;so&nbsp;getting&nbsp;a&nbsp;value&nbsp;in&nbsp;one&nbsp;format&nbsp;many&nbsp;times&nbsp;incurs&nbsp;no&nbsp;extra<br>
+performance&nbsp;cost.&nbsp;&nbsp;Assigning&nbsp;to&nbsp;the&nbsp;<a href="#SDR">SDR</a>&nbsp;via&nbsp;any&nbsp;one&nbsp;of&nbsp;these&nbsp;properties&nbsp;clears<br>
+the&nbsp;cached&nbsp;values&nbsp;and&nbsp;causes&nbsp;them&nbsp;to&nbsp;be&nbsp;recomputed&nbsp;as&nbsp;needed.<br>
+&nbsp;<br>
+Example&nbsp;usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Make&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;with&nbsp;9&nbsp;values,&nbsp;arranged&nbsp;in&nbsp;a&nbsp;(3&nbsp;x&nbsp;3)&nbsp;grid.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;=&nbsp;<a href="#SDR">SDR</a>(dimensions&nbsp;=&nbsp;(3,&nbsp;3))<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;These&nbsp;three&nbsp;statements&nbsp;are&nbsp;equivalent.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.dense&nbsp;&nbsp;=&nbsp;[[0,&nbsp;1,&nbsp;0],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0,&nbsp;1,&nbsp;0],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[0,&nbsp;0,&nbsp;1]]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.sparse&nbsp;=&nbsp;[&nbsp;1,&nbsp;4,&nbsp;8&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.coordinates&nbsp;=&nbsp;[[0,&nbsp;1,&nbsp;2],&nbsp;[1,&nbsp;1,&nbsp;2]]<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Access&nbsp;data&nbsp;in&nbsp;any&nbsp;format,&nbsp;<a href="#SDR">SDR</a>&nbsp;will&nbsp;automatically&nbsp;convert&nbsp;data&nbsp;formats,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;even&nbsp;if&nbsp;it&nbsp;was&nbsp;not&nbsp;the&nbsp;format&nbsp;used&nbsp;by&nbsp;the&nbsp;most&nbsp;recent&nbsp;assignment&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.dense&nbsp;&nbsp;-&gt;&nbsp;[[&nbsp;0,&nbsp;1,&nbsp;0&nbsp;],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;0,&nbsp;1,&nbsp;0&nbsp;],<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;0,&nbsp;0,&nbsp;1&nbsp;]]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;x.sparse&nbsp;-&gt;&nbsp;[&nbsp;1,&nbsp;4,&nbsp;8&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.coordinates&nbsp;-&gt;&nbsp;[[&nbsp;0,&nbsp;1,&nbsp;2&nbsp;],&nbsp;[1,&nbsp;1,&nbsp;2&nbsp;]]<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Data&nbsp;format&nbsp;conversions&nbsp;are&nbsp;cached,&nbsp;and&nbsp;when&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;value&nbsp;changes&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;cache&nbsp;is&nbsp;cleared.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.sparse&nbsp;=&nbsp;[1,&nbsp;2,&nbsp;3]&nbsp;#&nbsp;Assign&nbsp;new&nbsp;data&nbsp;to&nbsp;the&nbsp;<a href="#SDR">SDR</a>,&nbsp;clearing&nbsp;the&nbsp;cache.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.dense&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;This&nbsp;line&nbsp;will&nbsp;convert&nbsp;formats.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.dense&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;This&nbsp;line&nbsp;will&nbsp;resuse&nbsp;the&nbsp;result&nbsp;of&nbsp;the&nbsp;previous&nbsp;line<br>
+&nbsp;<br>
+Assigning&nbsp;a&nbsp;value&nbsp;to&nbsp;the&nbsp;<a href="#SDR">SDR</a>&nbsp;requires&nbsp;copying&nbsp;the&nbsp;data&nbsp;from&nbsp;Python&nbsp;into&nbsp;C++.&nbsp;To<br>
+avoid&nbsp;this&nbsp;copy&nbsp;operation:&nbsp;modify&nbsp;sdr.dense&nbsp;inplace,&nbsp;and&nbsp;assign&nbsp;it&nbsp;to&nbsp;itself.<br>
+This&nbsp;class&nbsp;will&nbsp;detect&nbsp;that&nbsp;it's&nbsp;being&nbsp;given&nbsp;it's&nbsp;own&nbsp;data&nbsp;and&nbsp;will&nbsp;omit&nbsp;the<br>
+copy&nbsp;operation.<br>
+&nbsp;<br>
+Example&nbsp;Usage&nbsp;of&nbsp;In-Place&nbsp;Assignment:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;<a href="#SDR">SDR</a>((1000,&nbsp;1000))&nbsp;&nbsp;&nbsp;#&nbsp;Initial&nbsp;value&nbsp;is&nbsp;all&nbsp;zeros<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;=&nbsp;X.dense<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data[&nbsp;&nbsp;0,&nbsp;&nbsp;&nbsp;4]&nbsp;=&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data[444,&nbsp;444]&nbsp;=&nbsp;1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.dense&nbsp;=&nbsp;data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.sparse&nbsp;-&gt;&nbsp;[&nbsp;4,&nbsp;444444&nbsp;]<br>
+&nbsp;<br>
+Data&nbsp;Validity&nbsp;Warning:&nbsp;&nbsp;After&nbsp;assigning&nbsp;a&nbsp;new&nbsp;value&nbsp;to&nbsp;the&nbsp;<a href="#SDR">SDR</a>,&nbsp;all&nbsp;existing<br>
+numpy&nbsp;arrays&nbsp;of&nbsp;data&nbsp;are&nbsp;invalid.&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;get&nbsp;the&nbsp;latest&nbsp;copy&nbsp;of&nbsp;the&nbsp;data,<br>
+re-access&nbsp;the&nbsp;data&nbsp;from&nbsp;the&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;Examples:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;dimensions&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;out_of_date&nbsp;=&nbsp;A.dense<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.sparse&nbsp;=&nbsp;[]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;The&nbsp;variable&nbsp;"out_of_date"&nbsp;is&nbsp;now&nbsp;liable&nbsp;to&nbsp;be&nbsp;overwritten.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.dense&nbsp;=&nbsp;out_of_date&nbsp;&nbsp;&nbsp;#&nbsp;This&nbsp;does&nbsp;not&nbsp;work,&nbsp;since&nbsp;the&nbsp;data&nbsp;is&nbsp;invalid.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="htm.bindings.sdr.html#SDR">SDR</a></dd>
+<dd>pybind11_builtins.pybind11_object</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SDR-__eq__"><strong>__eq__</strong></a>(...)</dt><dd><tt><a href="#SDR-__eq__">__eq__</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;bool</tt></dd></dl>
+
+<dl><dt><a name="SDR-__getstate__"><strong>__getstate__</strong></a>(...)</dt><dd><tt><a href="#SDR-__getstate__">__getstate__</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;bytes</tt></dd></dl>
+
+<dl><dt><a name="SDR-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt><a href="#SDR-__init__">__init__</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#SDR-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;dimensions:&nbsp;List[int])&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Create&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;object.&nbsp;&nbsp;The&nbsp;initial&nbsp;value&nbsp;is&nbsp;all&nbsp;zeros.<br>
+&nbsp;<br>
+Argument&nbsp;dimensions&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;dimension&nbsp;sizes,&nbsp;defining&nbsp;the&nbsp;shape&nbsp;of&nbsp;the&nbsp;<a href="#SDR">SDR</a>.<br>
+The&nbsp;product&nbsp;of&nbsp;the&nbsp;dimensions&nbsp;must&nbsp;be&nbsp;greater&nbsp;than&nbsp;zero.<br>
+&nbsp;<br>
+2.&nbsp;<a href="#SDR-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;dimensions:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Create&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;object.&nbsp;&nbsp;The&nbsp;initial&nbsp;value&nbsp;is&nbsp;all&nbsp;zeros.<br>
+&nbsp;<br>
+Argument&nbsp;dimensions&nbsp;is&nbsp;a&nbsp;single&nbsp;integer&nbsp;dimension&nbsp;size,&nbsp;defining&nbsp;a&nbsp;1-dimensional<br>
+<a href="#SDR">SDR</a>.&nbsp;&nbsp;Must&nbsp;be&nbsp;greater&nbsp;than&nbsp;zero.<br>
+&nbsp;<br>
+3.&nbsp;<a href="#SDR-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;sdr:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Initialize&nbsp;this&nbsp;<a href="#SDR">SDR</a>&nbsp;as&nbsp;a&nbsp;deep&nbsp;copy&nbsp;of&nbsp;the&nbsp;given&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;<a href="#SDR">SDR</a>&nbsp;and&nbsp;the&nbsp;given<br>
+<a href="#SDR">SDR</a>&nbsp;will&nbsp;have&nbsp;no&nbsp;shared&nbsp;data&nbsp;and&nbsp;they&nbsp;can&nbsp;be&nbsp;modified&nbsp;without&nbsp;affecting&nbsp;each<br>
+other.</tt></dd></dl>
+
+<dl><dt><a name="SDR-__ne__"><strong>__ne__</strong></a>(...)</dt><dd><tt><a href="#SDR-__ne__">__ne__</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;bool</tt></dd></dl>
+
+<dl><dt><a name="SDR-__setstate__"><strong>__setstate__</strong></a>(...)</dt><dd><tt><a href="#SDR-__setstate__">__setstate__</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;bytes)&nbsp;-&gt;&nbsp;None</tt></dd></dl>
+
+<dl><dt><a name="SDR-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt><a href="#SDR-__str__">__str__</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="SDR-addNoise"><strong>addNoise</strong></a>(...)</dt><dd><tt><a href="#SDR-addNoise">addNoise</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;fractionNoise:&nbsp;float,&nbsp;seed:&nbsp;int&nbsp;=&nbsp;0)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+Modify&nbsp;the&nbsp;<a href="#SDR">SDR</a>&nbsp;by&nbsp;moving&nbsp;a&nbsp;fraction&nbsp;of&nbsp;the&nbsp;active&nbsp;bits&nbsp;to&nbsp;different<br>
+locations.&nbsp;&nbsp;This&nbsp;method&nbsp;does&nbsp;not&nbsp;change&nbsp;the&nbsp;sparsity&nbsp;of&nbsp;the&nbsp;<a href="#SDR">SDR</a>,&nbsp;it&nbsp;moves<br>
+the&nbsp;locations&nbsp;of&nbsp;the&nbsp;true&nbsp;values.&nbsp;&nbsp;The&nbsp;resulting&nbsp;<a href="#SDR">SDR</a>&nbsp;has&nbsp;a&nbsp;controlled<br>
+amount&nbsp;of&nbsp;overlap&nbsp;with&nbsp;the&nbsp;original.<br>
+&nbsp;<br>
+Argument&nbsp;fractionNoise&nbsp;is&nbsp;the&nbsp;fraction&nbsp;of&nbsp;active&nbsp;bits&nbsp;to&nbsp;swap&nbsp;out.&nbsp;&nbsp;The&nbsp;original<br>
+and&nbsp;resulting&nbsp;SDRs&nbsp;have&nbsp;the&nbsp;following&nbsp;relationship:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;originalSDR.<a href="#SDR-getOverlap">getOverlap</a>(&nbsp;newSDR&nbsp;)&nbsp;/&nbsp;sparsity&nbsp;==&nbsp;1&nbsp;-&nbsp;fractionNoise<br>
+&nbsp;<br>
+Optional&nbsp;argument&nbsp;seed&nbsp;is&nbsp;used&nbsp;for&nbsp;the&nbsp;random&nbsp;number&nbsp;generator.&nbsp;&nbsp;Seed&nbsp;0&nbsp;is<br>
+special,&nbsp;it&nbsp;is&nbsp;replaced&nbsp;with&nbsp;the&nbsp;system&nbsp;time.&nbsp;&nbsp;The&nbsp;default&nbsp;seed&nbsp;is&nbsp;0.</tt></dd></dl>
+
+<dl><dt><a name="SDR-concatenate"><strong>concatenate</strong></a>(...)</dt><dd><tt><a href="#SDR-concatenate">concatenate</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#SDR-concatenate">concatenate</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;input1:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;input2:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;axis:&nbsp;int&nbsp;=&nbsp;0)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+Concatenates&nbsp;SDRs&nbsp;and&nbsp;stores&nbsp;the&nbsp;result&nbsp;in&nbsp;this&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;two&nbsp;overloads:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1)&nbsp;Accepts&nbsp;two&nbsp;SDRs,&nbsp;for&nbsp;convenience.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2)&nbsp;Accepts&nbsp;a&nbsp;list&nbsp;of&nbsp;SDRs,&nbsp;must&nbsp;contain&nbsp;at&nbsp;least&nbsp;two&nbsp;SDRs,&nbsp;can<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;contain&nbsp;as&nbsp;many&nbsp;SDRs&nbsp;as&nbsp;needed.<br>
+&nbsp;<br>
+Argument&nbsp;axis:&nbsp;This&nbsp;can&nbsp;concatenate&nbsp;along&nbsp;any&nbsp;axis,&nbsp;as&nbsp;long&nbsp;as&nbsp;the<br>
+result&nbsp;has&nbsp;the&nbsp;same&nbsp;dimensions&nbsp;as&nbsp;this&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;The&nbsp;default&nbsp;axis&nbsp;is&nbsp;0.<br>
+&nbsp;<br>
+The&nbsp;output&nbsp;is&nbsp;stored&nbsp;in&nbsp;this&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;method&nbsp;modifies&nbsp;this&nbsp;<a href="#SDR">SDR</a><br>
+and&nbsp;discards&nbsp;its&nbsp;current&nbsp;value!<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;C&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;20&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.sparse&nbsp;=&nbsp;[0,&nbsp;1,&nbsp;2]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.sparse&nbsp;=&nbsp;[0,&nbsp;1,&nbsp;2]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;C.<a href="#SDR-concatenate">concatenate</a>(&nbsp;A,&nbsp;B&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;C.sparse&nbsp;==&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;10,&nbsp;11,&nbsp;12]<br>
+&nbsp;<br>
+&nbsp;<br>
+2.&nbsp;<a href="#SDR-concatenate">concatenate</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;inputs:&nbsp;List[htm.bindings.sdr.<a href="#SDR">SDR</a>],&nbsp;axis:&nbsp;int&nbsp;=&nbsp;0)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a></tt></dd></dl>
+
+<dl><dt><a name="SDR-flatten"><strong>flatten</strong></a>(...)</dt><dd><tt><a href="#SDR-flatten">flatten</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;dimensions&nbsp;of&nbsp;the&nbsp;<a href="#SDR">SDR</a>&nbsp;into&nbsp;one&nbsp;big&nbsp;dimension.</tt></dd></dl>
+
+<dl><dt><a name="SDR-getOverlap"><strong>getOverlap</strong></a>(...)</dt><dd><tt><a href="#SDR-getOverlap">getOverlap</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;int<br>
+&nbsp;<br>
+Calculates&nbsp;the&nbsp;number&nbsp;of&nbsp;true&nbsp;bits&nbsp;which&nbsp;both&nbsp;SDRs&nbsp;have&nbsp;in&nbsp;common.</tt></dd></dl>
+
+<dl><dt><a name="SDR-getSparsity"><strong>getSparsity</strong></a>(...)</dt><dd><tt><a href="#SDR-getSparsity">getSparsity</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Calculates&nbsp;the&nbsp;sparsity&nbsp;of&nbsp;the&nbsp;<a href="#SDR">SDR</a>,&nbsp;which&nbsp;is&nbsp;the&nbsp;fraction&nbsp;of&nbsp;bits&nbsp;which&nbsp;are<br>
+true&nbsp;out&nbsp;of&nbsp;the&nbsp;total&nbsp;number&nbsp;of&nbsp;bits&nbsp;in&nbsp;the&nbsp;<a href="#SDR">SDR</a>.<br>
+I.E.&nbsp;&nbsp;sparsity&nbsp;=&nbsp;sdr.<a href="#SDR-getSum">getSum</a>()&nbsp;/&nbsp;sdr.size</tt></dd></dl>
+
+<dl><dt><a name="SDR-getSum"><strong>getSum</strong></a>(...)</dt><dd><tt><a href="#SDR-getSum">getSum</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;int<br>
+&nbsp;<br>
+Calculates&nbsp;the&nbsp;number&nbsp;of&nbsp;true&nbsp;values&nbsp;in&nbsp;the&nbsp;<a href="#SDR">SDR</a>.</tt></dd></dl>
+
+<dl><dt><a name="SDR-intersection"><strong>intersection</strong></a>(...)</dt><dd><tt><a href="#SDR-intersection">intersection</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#SDR-intersection">intersection</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg1:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+This&nbsp;method&nbsp;calculates&nbsp;the&nbsp;set&nbsp;intersection&nbsp;of&nbsp;the&nbsp;active&nbsp;bits&nbsp;in&nbsp;each&nbsp;input<br>
+<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+This&nbsp;method&nbsp;has&nbsp;two&nbsp;overloads:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1)&nbsp;Accepts&nbsp;two&nbsp;SDRs,&nbsp;for&nbsp;convenience.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2)&nbsp;Accepts&nbsp;a&nbsp;list&nbsp;of&nbsp;SDRs,&nbsp;must&nbsp;contain&nbsp;at&nbsp;least&nbsp;two&nbsp;SDRs,&nbsp;can&nbsp;contain&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;many&nbsp;SDRs&nbsp;as&nbsp;needed.<br>
+&nbsp;<br>
+In&nbsp;both&nbsp;cases&nbsp;the&nbsp;output&nbsp;is&nbsp;stored&nbsp;in&nbsp;this&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;method&nbsp;modifies&nbsp;this&nbsp;<a href="#SDR">SDR</a><br>
+and&nbsp;discards&nbsp;its&nbsp;current&nbsp;value!<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.sparse&nbsp;=&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.sparse&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2,&nbsp;3,&nbsp;4,&nbsp;5]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.<a href="#SDR-intersection">intersection</a>(&nbsp;A,&nbsp;B&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;X.sparse&nbsp;-&gt;&nbsp;[2,&nbsp;3]<br>
+&nbsp;<br>
+&nbsp;<br>
+2.&nbsp;<a href="#SDR-intersection">intersection</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;List[htm.bindings.sdr.<a href="#SDR">SDR</a>])&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a></tt></dd></dl>
+
+<dl><dt><a name="SDR-killCells"><strong>killCells</strong></a>(...)</dt><dd><tt><a href="#SDR-killCells">killCells</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;fraction:&nbsp;float,&nbsp;seed:&nbsp;int&nbsp;=&nbsp;0)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+Modify&nbsp;the&nbsp;<a href="#SDR">SDR</a>&nbsp;by&nbsp;setting&nbsp;a&nbsp;fraction&nbsp;of&nbsp;the&nbsp;bits&nbsp;to&nbsp;zero.<br>
+&nbsp;<br>
+Argument&nbsp;fraction&nbsp;must&nbsp;be&nbsp;between&nbsp;0&nbsp;and&nbsp;1&nbsp;(inclusive).&nbsp;&nbsp;This&nbsp;fraction&nbsp;of&nbsp;the<br>
+cells&nbsp;in&nbsp;the&nbsp;<a href="#SDR">SDR</a>&nbsp;will&nbsp;be&nbsp;set&nbsp;to&nbsp;zero,&nbsp;regardless&nbsp;of&nbsp;their&nbsp;current&nbsp;state.<br>
+&nbsp;<br>
+Argument&nbsp;seed&nbsp;is&nbsp;for&nbsp;a&nbsp;random&nbsp;number&nbsp;generator.&nbsp;&nbsp;If&nbsp;not&nbsp;given,&nbsp;this&nbsp;uses&nbsp;the<br>
+magic&nbsp;seed&nbsp;0.&nbsp;&nbsp;Use&nbsp;the&nbsp;same&nbsp;seed&nbsp;to&nbsp;consistently&nbsp;kill&nbsp;the&nbsp;same&nbsp;cells.</tt></dd></dl>
+
+<dl><dt><a name="SDR-randomize"><strong>randomize</strong></a>(...)</dt><dd><tt><a href="#SDR-randomize">randomize</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#SDR-randomize">randomize</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;sparsity:&nbsp;float,&nbsp;seed:&nbsp;int&nbsp;=&nbsp;0)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+Make&nbsp;a&nbsp;random&nbsp;<a href="#SDR">SDR</a>,&nbsp;overwriting&nbsp;the&nbsp;current&nbsp;value&nbsp;of&nbsp;the&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;The&nbsp;result&nbsp;has<br>
+uniformly&nbsp;random&nbsp;activations.<br>
+&nbsp;<br>
+Argument&nbsp;sparsity&nbsp;is&nbsp;the&nbsp;fraction&nbsp;of&nbsp;bits&nbsp;to&nbsp;set&nbsp;to&nbsp;true.&nbsp;&nbsp;After&nbsp;calling&nbsp;this<br>
+method&nbsp;sdr.<a href="#SDR-getSparsity">getSparsity</a>()&nbsp;will&nbsp;return&nbsp;this&nbsp;sparsity,&nbsp;rounded&nbsp;to&nbsp;the&nbsp;nearest<br>
+fraction&nbsp;of&nbsp;self.<strong>size</strong>.<br>
+&nbsp;<br>
+Optional&nbsp;argument&nbsp;seed&nbsp;is&nbsp;used&nbsp;for&nbsp;the&nbsp;random&nbsp;number&nbsp;generator.&nbsp;&nbsp;Seed&nbsp;0&nbsp;is<br>
+special,&nbsp;it&nbsp;is&nbsp;replaced&nbsp;with&nbsp;the&nbsp;system&nbsp;time&nbsp;&nbsp;The&nbsp;default&nbsp;seed&nbsp;is&nbsp;0.<br>
+&nbsp;<br>
+2.&nbsp;<a href="#SDR-randomize">randomize</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;sparsity:&nbsp;float,&nbsp;rng:&nbsp;htm.bindings.math.Random)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+This&nbsp;overload&nbsp;accepts&nbsp;Random&nbsp;Number&nbsp;Generators&nbsp;(RNG)&nbsp;intead&nbsp;of&nbsp;a&nbsp;random&nbsp;seed.<br>
+RNGs&nbsp;must&nbsp;be&nbsp;instances&nbsp;of&nbsp;"htm.bindings.math.Random".</tt></dd></dl>
+
+<dl><dt><a name="SDR-reshape"><strong>reshape</strong></a>(...)</dt><dd><tt><a href="#SDR-reshape">reshape</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;List[int])&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+Change&nbsp;the&nbsp;dimensions&nbsp;of&nbsp;the&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;The&nbsp;total&nbsp;size&nbsp;must&nbsp;not&nbsp;change.</tt></dd></dl>
+
+<dl><dt><a name="SDR-setSDR"><strong>setSDR</strong></a>(...)</dt><dd><tt><a href="#SDR-setSDR">setSDR</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+Deep&nbsp;Copy&nbsp;the&nbsp;given&nbsp;<a href="#SDR">SDR</a>&nbsp;to&nbsp;this&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;overwrites&nbsp;the&nbsp;current&nbsp;value&nbsp;of&nbsp;this<br>
+<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;<a href="#SDR">SDR</a>&nbsp;and&nbsp;the&nbsp;given&nbsp;<a href="#SDR">SDR</a>&nbsp;will&nbsp;have&nbsp;no&nbsp;shared&nbsp;data&nbsp;and&nbsp;they&nbsp;can&nbsp;be<br>
+modified&nbsp;without&nbsp;affecting&nbsp;each&nbsp;other.</tt></dd></dl>
+
+<dl><dt><a name="SDR-union"><strong>union</strong></a>(...)</dt><dd><tt><a href="#SDR-union">union</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#SDR-union">union</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg1:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+This&nbsp;method&nbsp;calculates&nbsp;the&nbsp;set&nbsp;union&nbsp;of&nbsp;the&nbsp;active&nbsp;bits&nbsp;in&nbsp;each&nbsp;input&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+The&nbsp;output&nbsp;is&nbsp;stored&nbsp;in&nbsp;this&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;method&nbsp;discards&nbsp;the&nbsp;SDRs&nbsp;current&nbsp;value!<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;U&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.sparse&nbsp;=&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.sparse&nbsp;=&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2,&nbsp;3,&nbsp;4,&nbsp;5]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;U.<a href="#SDR-union">union</a>(&nbsp;A,&nbsp;B&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;U.sparse&nbsp;-&gt;&nbsp;[0,&nbsp;1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5]<br>
+&nbsp;<br>
+&nbsp;<br>
+2.&nbsp;<a href="#SDR-union">union</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;arg0:&nbsp;List[htm.bindings.sdr.<a href="#SDR">SDR</a>])&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a></tt></dd></dl>
+
+<dl><dt><a name="SDR-zero"><strong>zero</strong></a>(...)</dt><dd><tt><a href="#SDR-zero">zero</a>(self:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a><br>
+&nbsp;<br>
+Set&nbsp;all&nbsp;of&nbsp;the&nbsp;values&nbsp;in&nbsp;the&nbsp;<a href="#SDR">SDR</a>&nbsp;to&nbsp;false.&nbsp;&nbsp;This&nbsp;method&nbsp;overwrites&nbsp;the&nbsp;SDRs<br>
+current&nbsp;value.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>coordinates</strong></dt>
+<dd><tt>List&nbsp;of&nbsp;numpy&nbsp;arrays,&nbsp;containing&nbsp;the&nbsp;coordinates&nbsp;of&nbsp;only&nbsp;the&nbsp;true&nbsp;values&nbsp;in<br>
+the&nbsp;SDR.&nbsp;&nbsp;This&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;lists:&nbsp;the&nbsp;outter&nbsp;list&nbsp;contains&nbsp;an&nbsp;entry&nbsp;for&nbsp;each<br>
+dimension&nbsp;in&nbsp;the&nbsp;SDR.&nbsp;The&nbsp;inner&nbsp;lists&nbsp;contain&nbsp;the&nbsp;coordinates&nbsp;of&nbsp;each&nbsp;true&nbsp;bit.<br>
+The&nbsp;inner&nbsp;lists&nbsp;run&nbsp;in&nbsp;parallel.&nbsp;This&nbsp;format&nbsp;is&nbsp;useful&nbsp;because&nbsp;it&nbsp;contains&nbsp;the<br>
+location&nbsp;of&nbsp;each&nbsp;true&nbsp;bit&nbsp;inside&nbsp;of&nbsp;the&nbsp;SDR's&nbsp;dimensional&nbsp;space.<br>
+&nbsp;<br>
+Coordinate&nbsp;data&nbsp;must&nbsp;be&nbsp;sorted&nbsp;and&nbsp;contain&nbsp;no&nbsp;duplicates.</tt></dd>
+</dl>
+<dl><dt><strong>dense</strong></dt>
+<dd><tt>A&nbsp;numpy&nbsp;array&nbsp;of&nbsp;boolean&nbsp;values,&nbsp;representing&nbsp;all&nbsp;of&nbsp;the&nbsp;bits&nbsp;in&nbsp;the&nbsp;SDR.<br>
+This&nbsp;format&nbsp;allows&nbsp;random-access&nbsp;queries&nbsp;of&nbsp;the&nbsp;SDRs&nbsp;values.<br>
+&nbsp;<br>
+After&nbsp;modifying&nbsp;this&nbsp;array&nbsp;you&nbsp;MUST&nbsp;assign&nbsp;the&nbsp;array&nbsp;back&nbsp;into&nbsp;the&nbsp;SDR,&nbsp;in&nbsp;order<br>
+to&nbsp;notify&nbsp;the&nbsp;SDR&nbsp;that&nbsp;its&nbsp;dense&nbsp;array&nbsp;has&nbsp;changed&nbsp;and&nbsp;its&nbsp;cached&nbsp;data&nbsp;is&nbsp;out&nbsp;of<br>
+date.&nbsp;&nbsp;If&nbsp;you&nbsp;did't&nbsp;copy&nbsp;this&nbsp;data,&nbsp;then&nbsp;SDR&nbsp;won't&nbsp;copy&nbsp;either.</tt></dd>
+</dl>
+<dl><dt><strong>dimensions</strong></dt>
+<dd><tt>A&nbsp;list&nbsp;of&nbsp;dimensions&nbsp;of&nbsp;the&nbsp;SDR.</tt></dd>
+</dl>
+<dl><dt><strong>size</strong></dt>
+<dd><tt>The&nbsp;total&nbsp;number&nbsp;of&nbsp;boolean&nbsp;values&nbsp;in&nbsp;the&nbsp;SDR.</tt></dd>
+</dl>
+<dl><dt><strong>sparse</strong></dt>
+<dd><tt>A&nbsp;numpy&nbsp;array&nbsp;containing&nbsp;the&nbsp;indices&nbsp;of&nbsp;only&nbsp;the&nbsp;true&nbsp;values&nbsp;in&nbsp;the&nbsp;SDR.<br>
+These&nbsp;are&nbsp;indices&nbsp;into&nbsp;the&nbsp;flattened&nbsp;SDR.&nbsp;This&nbsp;format&nbsp;allows&nbsp;for&nbsp;quickly<br>
+accessing&nbsp;all&nbsp;of&nbsp;the&nbsp;true&nbsp;bits&nbsp;in&nbsp;the&nbsp;SDR.<br>
+&nbsp;<br>
+Sparse&nbsp;data&nbsp;must&nbsp;contain&nbsp;no&nbsp;duplicates.</tt></dd>
+</dl>
+<hr>
+Static methods inherited from pybind11_builtins.pybind11_object:<br>
+<dl><dt><a name="SDR-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from pybind11_builtins.pybind11_type</font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Sparsity">class <strong>Sparsity</strong></a>(<a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Measures&nbsp;the&nbsp;sparsity&nbsp;of&nbsp;an&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;This&nbsp;accumulates&nbsp;measurements&nbsp;using&nbsp;an<br>
+exponential&nbsp;moving&nbsp;average,&nbsp;and&nbsp;outputs&nbsp;a&nbsp;summary&nbsp;of&nbsp;results.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;<a href="#SDR">SDR</a>(&nbsp;dimensions&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;=&nbsp;<a href="#Sparsity">Sparsity</a>(&nbsp;A,&nbsp;period&nbsp;=&nbsp;1000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.randomize(&nbsp;0.01&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.randomize(&nbsp;0.15&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.randomize(&nbsp;0.05&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.sparsity&nbsp;-&gt;&nbsp;&nbsp;0.05<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#Sparsity-min">min</a>()&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.01<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#Sparsity-max">max</a>()&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.15<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#Sparsity-mean">mean</a>()&nbsp;&nbsp;&nbsp;-&gt;&nbsp;~0.07<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#Sparsity-std">std</a>()&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;~0.06<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str(B)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;<a href="#Sparsity">Sparsity</a>&nbsp;Min/Mean/Std/Max&nbsp;0.01&nbsp;/&nbsp;0.0700033&nbsp;/&nbsp;0.0588751&nbsp;/&nbsp;0.15<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="htm.bindings.sdr.html#Sparsity">Sparsity</a></dd>
+<dd><a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a></dd>
+<dd>pybind11_builtins.pybind11_object</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Sparsity-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt><a href="#Sparsity-__init__">__init__</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#Sparsity-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#Sparsity">Sparsity</a>,&nbsp;sdr:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>,&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source&nbsp;is&nbsp;to&nbsp;track.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;sparsity&nbsp;metric&nbsp;by<br>
+assigning&nbsp;to&nbsp;this&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.<br>
+&nbsp;<br>
+2.&nbsp;<a href="#Sparsity-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.<a href="#Sparsity">Sparsity</a>,&nbsp;dimensions:&nbsp;List[int],&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;dimensions&nbsp;of&nbsp;<a href="#SDR">SDR</a>.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;sparsity&nbsp;metric&nbsp;by&nbsp;calling&nbsp;method<br>
+sparsity.<a href="#Sparsity-addData">addData</a>(&nbsp;<a href="#SDR">SDR</a>&nbsp;)&nbsp;with&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;which&nbsp;has&nbsp;these&nbsp;dimensions.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd></dl>
+
+<dl><dt><a name="Sparsity-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt><a href="#Sparsity-__str__">__str__</a>(self:&nbsp;htm.bindings.sdr.<a href="#Sparsity">Sparsity</a>)&nbsp;-&gt;&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Sparsity-max"><strong>max</strong></a>(...)</dt><dd><tt><a href="#Sparsity-max">max</a>(self:&nbsp;htm.bindings.sdr.<a href="#Sparsity">Sparsity</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Maximum&nbsp;<a href="#Sparsity">Sparsity</a></tt></dd></dl>
+
+<dl><dt><a name="Sparsity-mean"><strong>mean</strong></a>(...)</dt><dd><tt><a href="#Sparsity-mean">mean</a>(self:&nbsp;htm.bindings.sdr.<a href="#Sparsity">Sparsity</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Average&nbsp;of&nbsp;<a href="#Sparsity">Sparsity</a></tt></dd></dl>
+
+<dl><dt><a name="Sparsity-min"><strong>min</strong></a>(...)</dt><dd><tt><a href="#Sparsity-min">min</a>(self:&nbsp;htm.bindings.sdr.<a href="#Sparsity">Sparsity</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Minimum&nbsp;<a href="#Sparsity">Sparsity</a></tt></dd></dl>
+
+<dl><dt><a name="Sparsity-std"><strong>std</strong></a>(...)</dt><dd><tt><a href="#Sparsity-std">std</a>(self:&nbsp;htm.bindings.sdr.<a href="#Sparsity">Sparsity</a>)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Standard&nbsp;Deviation&nbsp;of&nbsp;<a href="#Sparsity">Sparsity</a></tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>sparsity</strong></dt>
+<dd><tt>Current&nbsp;Sparsity,&nbsp;or&nbsp;sparsity&nbsp;of&nbsp;most&nbsp;recently&nbsp;added&nbsp;SDR.</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><a name="Sparsity-addData"><strong>addData</strong></a>(...)</dt><dd><tt><a href="#Sparsity-addData">addData</a>(self:&nbsp;htm.bindings.sdr.<a href="#MetricsHelper_">MetricsHelper_</a>,&nbsp;arg0:&nbsp;htm.bindings.sdr.<a href="#SDR">SDR</a>)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Add&nbsp;an&nbsp;<a href="#SDR">SDR</a>&nbsp;datum&nbsp;to&nbsp;this&nbsp;Metric.&nbsp;&nbsp;This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;called&nbsp;if&nbsp;the<br>
+Metric&nbsp;was&nbsp;constructed&nbsp;with&nbsp;dimensions&nbsp;and&nbsp;NOT&nbsp;an&nbsp;<a href="#SDR">SDR</a>.<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source,&nbsp;its&nbsp;dimensions&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;this&nbsp;Metric's<br>
+dimensions.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><strong>dimensions</strong></dt>
+<dd><tt>Shape&nbsp;of&nbsp;the&nbsp;SDR&nbsp;data&nbsp;source.</tt></dd>
+</dl>
+<dl><dt><strong>period</strong></dt>
+<dd><tt>Time&nbsp;constant&nbsp;for&nbsp;the&nbsp;exponential&nbsp;moving&nbsp;average&nbsp;which&nbsp;incorporate&nbsp;data&nbsp;into<br>
+this&nbsp;measurement.&nbsp;&nbsp;If&nbsp;there&nbsp;are&nbsp;fewer&nbsp;data&nbsp;samples&nbsp;than&nbsp;the&nbsp;period&nbsp;then&nbsp;a&nbsp;regular<br>
+average&nbsp;is&nbsp;used&nbsp;instead&nbsp;of&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd>
+</dl>
+<dl><dt><strong>samples</strong></dt>
+<dd><tt>Number&nbsp;of&nbsp;data&nbsp;samples&nbsp;received&nbsp;&amp;&nbsp;incorporated&nbsp;into&nbsp;this&nbsp;measurement.</tt></dd>
+</dl>
+<hr>
+Static methods inherited from pybind11_builtins.pybind11_object:<br>
+<dl><dt><a name="Sparsity-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from pybind11_builtins.pybind11_type</font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

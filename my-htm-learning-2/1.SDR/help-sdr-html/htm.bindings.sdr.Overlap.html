@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: class Overlap</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><strong>htm.bindings.sdr.Overlap</strong> = <a name="htm.bindings.sdr.Overlap">class Overlap</a>(<a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Measures&nbsp;the&nbsp;overlap&nbsp;between&nbsp;successive&nbsp;assignments&nbsp;to&nbsp;an&nbsp;SDR.&nbsp;&nbsp;This&nbsp;class<br>
+accumulates&nbsp;measurements&nbsp;using&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average,&nbsp;and&nbsp;outputs&nbsp;a<br>
+summary&nbsp;of&nbsp;results.<br>
+&nbsp;<br>
+This&nbsp;class&nbsp;normalizes&nbsp;the&nbsp;overlap&nbsp;into&nbsp;the&nbsp;range&nbsp;[0,&nbsp;1]&nbsp;by&nbsp;dividing&nbsp;by&nbsp;the<br>
+number&nbsp;of&nbsp;active&nbsp;values.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;SDR(&nbsp;dimensions&nbsp;=&nbsp;1000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;=&nbsp;Overlap(&nbsp;A,&nbsp;period&nbsp;=&nbsp;1000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.randomize(&nbsp;0.20&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.addNoise(&nbsp;0.95&nbsp;)&nbsp;&nbsp;-&gt;&nbsp;&nbsp;5%&nbsp;overlap<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.addNoise(&nbsp;0.55&nbsp;)&nbsp;&nbsp;-&gt;&nbsp;45%&nbsp;overlap<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.addNoise(&nbsp;0.72&nbsp;)&nbsp;&nbsp;-&gt;&nbsp;28%&nbsp;overlap<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.overlap&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.28<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#htm.bindings.sdr.Overlap-min">min</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.05<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#htm.bindings.sdr.Overlap-max">max</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.45<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#htm.bindings.sdr.Overlap-mean">mean</a>()&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;&nbsp;0.26<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#htm.bindings.sdr.Overlap-std">std</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;~0.16<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str(B)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;Overlap&nbsp;Min/Mean/Std/Max&nbsp;0.05&nbsp;/&nbsp;0.260016&nbsp;/&nbsp;0.16389&nbsp;/&nbsp;0.45<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="htm.bindings.sdr.html#Overlap">Overlap</a></dd>
+<dd><a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a></dd>
+<dd>pybind11_builtins.pybind11_object</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Overlap-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Overlap-__init__">__init__</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#htm.bindings.sdr.Overlap-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.Overlap,&nbsp;sdr:&nbsp;htm.bindings.sdr.SDR,&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source&nbsp;to&nbsp;track.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;Overlap&nbsp;instance<br>
+by&nbsp;assigning&nbsp;to&nbsp;this&nbsp;SDR.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.<br>
+&nbsp;<br>
+2.&nbsp;<a href="#htm.bindings.sdr.Overlap-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.Overlap,&nbsp;dimensions:&nbsp;List[int],&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;dimensions&nbsp;of&nbsp;SDR.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;Overlap&nbsp;instance<br>
+by&nbsp;calling&nbsp;method&nbsp;overlap.<a href="#htm.bindings.sdr.Overlap-addData">addData</a>(&nbsp;SDR&nbsp;)&nbsp;with&nbsp;an&nbsp;SDR&nbsp;which&nbsp;has&nbsp;these&nbsp;dimensions.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd></dl>
+
+<dl><dt><a name="Overlap-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Overlap-__str__">__str__</a>(self:&nbsp;htm.bindings.sdr.Overlap)&nbsp;-&gt;&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Overlap-max"><strong>max</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Overlap-max">max</a>(self:&nbsp;htm.bindings.sdr.Overlap)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Maximum&nbsp;Overlap</tt></dd></dl>
+
+<dl><dt><a name="Overlap-mean"><strong>mean</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Overlap-mean">mean</a>(self:&nbsp;htm.bindings.sdr.Overlap)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Average&nbsp;Overlap</tt></dd></dl>
+
+<dl><dt><a name="Overlap-min"><strong>min</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Overlap-min">min</a>(self:&nbsp;htm.bindings.sdr.Overlap)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Minimum&nbsp;Overlap</tt></dd></dl>
+
+<dl><dt><a name="Overlap-reset"><strong>reset</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Overlap-reset">reset</a>(self:&nbsp;htm.bindings.sdr.Overlap)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+For&nbsp;use&nbsp;with&nbsp;time-series&nbsp;data&nbsp;sets.</tt></dd></dl>
+
+<dl><dt><a name="Overlap-std"><strong>std</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Overlap-std">std</a>(self:&nbsp;htm.bindings.sdr.Overlap)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Standard&nbsp;Deviation&nbsp;of&nbsp;Overlap</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>overlap</strong></dt>
+<dd><tt>Overlap&nbsp;between&nbsp;the&nbsp;two&nbsp;most&nbsp;recently&nbsp;added&nbsp;SDRs.</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><a name="Overlap-addData"><strong>addData</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Overlap-addData">addData</a>(self:&nbsp;htm.bindings.sdr.MetricsHelper_,&nbsp;arg0:&nbsp;htm.bindings.sdr.SDR)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Add&nbsp;an&nbsp;SDR&nbsp;datum&nbsp;to&nbsp;this&nbsp;Metric.&nbsp;&nbsp;This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;called&nbsp;if&nbsp;the<br>
+Metric&nbsp;was&nbsp;constructed&nbsp;with&nbsp;dimensions&nbsp;and&nbsp;NOT&nbsp;an&nbsp;SDR.<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source,&nbsp;its&nbsp;dimensions&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;this&nbsp;Metric's<br>
+dimensions.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><strong>dimensions</strong></dt>
+<dd><tt>Shape&nbsp;of&nbsp;the&nbsp;SDR&nbsp;data&nbsp;source.</tt></dd>
+</dl>
+<dl><dt><strong>period</strong></dt>
+<dd><tt>Time&nbsp;constant&nbsp;for&nbsp;the&nbsp;exponential&nbsp;moving&nbsp;average&nbsp;which&nbsp;incorporate&nbsp;data&nbsp;into<br>
+this&nbsp;measurement.&nbsp;&nbsp;If&nbsp;there&nbsp;are&nbsp;fewer&nbsp;data&nbsp;samples&nbsp;than&nbsp;the&nbsp;period&nbsp;then&nbsp;a&nbsp;regular<br>
+average&nbsp;is&nbsp;used&nbsp;instead&nbsp;of&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd>
+</dl>
+<dl><dt><strong>samples</strong></dt>
+<dd><tt>Number&nbsp;of&nbsp;data&nbsp;samples&nbsp;received&nbsp;&amp;&nbsp;incorporated&nbsp;into&nbsp;this&nbsp;measurement.</tt></dd>
+</dl>
+<hr>
+Static methods inherited from pybind11_builtins.pybind11_object:<br>
+<dl><dt><a name="Overlap-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from pybind11_builtins.pybind11_type</font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table>
+</body></html>

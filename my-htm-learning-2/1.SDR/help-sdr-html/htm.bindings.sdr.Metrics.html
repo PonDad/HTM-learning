@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: class Metrics</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><strong>htm.bindings.sdr.Metrics</strong> = <a name="htm.bindings.sdr.Metrics">class Metrics</a>(pybind11_builtins.pybind11_object)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Measures&nbsp;an&nbsp;SDR.&nbsp;&nbsp;This&nbsp;applies&nbsp;the&nbsp;following&nbsp;three&nbsp;metrics:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sparsity<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ActivationFrequency<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overlap<br>
+This&nbsp;accumulates&nbsp;measurements&nbsp;using&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average,&nbsp;and<br>
+outputs&nbsp;a&nbsp;summary&nbsp;of&nbsp;results.<br>
+&nbsp;<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;SDR(&nbsp;dimensions&nbsp;=&nbsp;2000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;M&nbsp;=&nbsp;Metrics(&nbsp;A,&nbsp;period&nbsp;=&nbsp;1000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.randomize(&nbsp;0.10&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;i&nbsp;in&nbsp;range(&nbsp;20&nbsp;):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A.addNoise(&nbsp;0.55&nbsp;)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;M.sparsity&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;Sparsity&nbsp;class&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;M.activationFrequency&nbsp;-&gt;&nbsp;ActivationFrequency&nbsp;class&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;M.overlap&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;Overlap&nbsp;class&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str(M)&nbsp;-&gt;&nbsp;SDR(&nbsp;2000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sparsity&nbsp;Min/Mean/Std/Max&nbsp;0.1&nbsp;/&nbsp;0.1&nbsp;/&nbsp;0&nbsp;/&nbsp;0.1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Activation&nbsp;Frequency&nbsp;Min/Mean/Std/Max&nbsp;0&nbsp;/&nbsp;0.1&nbsp;/&nbsp;0.100464&nbsp;/&nbsp;0.666667<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entropy&nbsp;0.822222<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overlap&nbsp;Min/Mean/Std/Max&nbsp;0.45&nbsp;/&nbsp;0.45&nbsp;/&nbsp;0&nbsp;/&nbsp;0.45<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="htm.bindings.sdr.html#Metrics">Metrics</a></dd>
+<dd>pybind11_builtins.pybind11_object</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Metrics-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Metrics-__init__">__init__</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#htm.bindings.sdr.Metrics-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.Metrics,&nbsp;sdr:&nbsp;htm.bindings.sdr.SDR,&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source&nbsp;to&nbsp;track.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;Metrics&nbsp;instance<br>
+by&nbsp;assigning&nbsp;to&nbsp;this&nbsp;SDR.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.<br>
+&nbsp;<br>
+2.&nbsp;<a href="#htm.bindings.sdr.Metrics-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.Metrics,&nbsp;dimensions:&nbsp;List[int],&nbsp;period:&nbsp;int)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;dimensions&nbsp;of&nbsp;SDR.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;Metrics&nbsp;instance<br>
+by&nbsp;calling&nbsp;method&nbsp;metrics.<a href="#htm.bindings.sdr.Metrics-addData">addData</a>(&nbsp;SDR&nbsp;)&nbsp;with&nbsp;an&nbsp;SDR&nbsp;which&nbsp;has&nbsp;these&nbsp;dimensions.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd></dl>
+
+<dl><dt><a name="Metrics-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Metrics-__str__">__str__</a>(self:&nbsp;htm.bindings.sdr.Metrics)&nbsp;-&gt;&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="Metrics-addData"><strong>addData</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Metrics-addData">addData</a>(self:&nbsp;htm.bindings.sdr.Metrics,&nbsp;sdr:&nbsp;htm.bindings.sdr.SDR)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Add&nbsp;an&nbsp;SDR&nbsp;datum&nbsp;to&nbsp;these&nbsp;Metrics.&nbsp;&nbsp;This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;called&nbsp;if<br>
+Metrics&nbsp;was&nbsp;constructed&nbsp;with&nbsp;dimensions&nbsp;and&nbsp;NOT&nbsp;an&nbsp;SDR.<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source,&nbsp;its&nbsp;dimensions&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;this&nbsp;Metric's<br>
+dimensions.</tt></dd></dl>
+
+<dl><dt><a name="Metrics-reset"><strong>reset</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.Metrics-reset">reset</a>(self:&nbsp;htm.bindings.sdr.Metrics)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+For&nbsp;use&nbsp;with&nbsp;time-series&nbsp;data&nbsp;sets.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>activationFrequency</strong></dt>
+<dd><tt></tt></dd>
+</dl>
+<dl><dt><strong>dimensions</strong></dt>
+<dd><tt></tt></dd>
+</dl>
+<dl><dt><strong>overlap</strong></dt>
+<dd><tt></tt></dd>
+</dl>
+<dl><dt><strong>sparsity</strong></dt>
+<dd><tt></tt></dd>
+</dl>
+<hr>
+Static methods inherited from pybind11_builtins.pybind11_object:<br>
+<dl><dt><a name="Metrics-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from pybind11_builtins.pybind11_type</font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table>
+</body></html>

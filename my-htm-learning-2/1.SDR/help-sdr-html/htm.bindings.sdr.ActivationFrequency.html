@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: class ActivationFrequency</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><strong>htm.bindings.sdr.ActivationFrequency</strong> = <a name="htm.bindings.sdr.ActivationFrequency">class ActivationFrequency</a>(<a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Measures&nbsp;the&nbsp;activation&nbsp;frequency&nbsp;of&nbsp;each&nbsp;value&nbsp;in&nbsp;an&nbsp;SDR.&nbsp;&nbsp;This&nbsp;accumulates<br>
+measurements&nbsp;using&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average,&nbsp;and&nbsp;outputs&nbsp;a&nbsp;summary&nbsp;of<br>
+results.<br>
+&nbsp;<br>
+Activation&nbsp;frequencies&nbsp;are&nbsp;Real&nbsp;numbers&nbsp;in&nbsp;the&nbsp;range&nbsp;[0,&nbsp;1],&nbsp;where&nbsp;zero<br>
+indicates&nbsp;never&nbsp;active,&nbsp;and&nbsp;one&nbsp;indicates&nbsp;always&nbsp;active.<br>
+Example&nbsp;Usage:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A&nbsp;=&nbsp;SDR(&nbsp;2&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B&nbsp;=&nbsp;ActivationFrequency(&nbsp;A,&nbsp;period&nbsp;=&nbsp;1000&nbsp;)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.dense&nbsp;=&nbsp;[0,&nbsp;0]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.dense&nbsp;=&nbsp;[0,&nbsp;1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;A.dense&nbsp;=&nbsp;[1,&nbsp;1]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.activationFrequency&nbsp;-&gt;&nbsp;{&nbsp;0.33,&nbsp;0.66&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#htm.bindings.sdr.ActivationFrequency-min">min</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;1/3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#htm.bindings.sdr.ActivationFrequency-max">max</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;2/3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#htm.bindings.sdr.ActivationFrequency-mean">mean</a>()&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;1/2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#htm.bindings.sdr.ActivationFrequency-std">std</a>()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;~0.16<br>
+&nbsp;&nbsp;&nbsp;&nbsp;B.<a href="#htm.bindings.sdr.ActivationFrequency-entropy">entropy</a>()&nbsp;-&gt;&nbsp;~0.92<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str(B)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&gt;&nbsp;Activation&nbsp;Frequency&nbsp;Min/Mean/Std/Max&nbsp;0.333333&nbsp;/&nbsp;0.5&nbsp;/&nbsp;0.166667&nbsp;/&nbsp;0.666667<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entropy&nbsp;0.918296<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="htm.bindings.sdr.html#ActivationFrequency">ActivationFrequency</a></dd>
+<dd><a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a></dd>
+<dd>pybind11_builtins.pybind11_object</dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="ActivationFrequency-__init__"><strong>__init__</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.ActivationFrequency-__init__">__init__</a>(*args,&nbsp;**kwargs)<br>
+Overloaded&nbsp;function.<br>
+&nbsp;<br>
+1.&nbsp;<a href="#htm.bindings.sdr.ActivationFrequency-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.ActivationFrequency,&nbsp;sdr:&nbsp;htm.bindings.sdr.SDR,&nbsp;period:&nbsp;int,&nbsp;initialValue:&nbsp;float&nbsp;=&nbsp;-1)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source&nbsp;to&nbsp;track.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;ActivationFrequency<br>
+instance&nbsp;by&nbsp;assigning&nbsp;to&nbsp;this&nbsp;SDR.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.<br>
+&nbsp;<br>
+Argument&nbsp;initialValue&nbsp;is&nbsp;Optional.&nbsp;&nbsp;Makes&nbsp;this&nbsp;ActivationFrequency&nbsp;instance<br>
+think&nbsp;that&nbsp;it&nbsp;is&nbsp;the&nbsp;result&nbsp;of&nbsp;a&nbsp;long&nbsp;running&nbsp;process&nbsp;(even&nbsp;though&nbsp;it&nbsp;was&nbsp;just<br>
+created).&nbsp;&nbsp;This&nbsp;assigns&nbsp;an&nbsp;initial&nbsp;activation&nbsp;frequency&nbsp;to&nbsp;all&nbsp;bits&nbsp;in&nbsp;the&nbsp;SDR,<br>
+and&nbsp;causes&nbsp;it&nbsp;to&nbsp;always&nbsp;use&nbsp;the&nbsp;exponential&nbsp;moving&nbsp;average&nbsp;instead&nbsp;of&nbsp;the<br>
+regular&nbsp;average&nbsp;which&nbsp;is&nbsp;usually&nbsp;applied&nbsp;to&nbsp;the&nbsp;first&nbsp;"period"&nbsp;many&nbsp;samples.<br>
+&nbsp;<br>
+Note:&nbsp;This&nbsp;argument&nbsp;is&nbsp;useful&nbsp;for&nbsp;using&nbsp;this&nbsp;metric&nbsp;as&nbsp;part&nbsp;of&nbsp;boosting<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;algorithms&nbsp;which&nbsp;seek&nbsp;to&nbsp;push&nbsp;the&nbsp;activation&nbsp;frequencies&nbsp;to&nbsp;a&nbsp;target<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value.&nbsp;These&nbsp;algorithms&nbsp;will&nbsp;overreact&nbsp;to&nbsp;the&nbsp;default&nbsp;early&nbsp;behavior&nbsp;of<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this&nbsp;class&nbsp;during&nbsp;the&nbsp;first&nbsp;"period"&nbsp;many&nbsp;samples.<br>
+&nbsp;<br>
+&nbsp;<br>
+2.&nbsp;<a href="#htm.bindings.sdr.ActivationFrequency-__init__">__init__</a>(self:&nbsp;htm.bindings.sdr.ActivationFrequency,&nbsp;dimensions:&nbsp;List[int],&nbsp;period:&nbsp;int,&nbsp;initialValue:&nbsp;float&nbsp;=&nbsp;-1)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Argument&nbsp;dimensions&nbsp;of&nbsp;SDR.&nbsp;&nbsp;Add&nbsp;data&nbsp;to&nbsp;this&nbsp;ActivationFrequency<br>
+instance&nbsp;by&nbsp;calling&nbsp;method&nbsp;af.<a href="#htm.bindings.sdr.ActivationFrequency-addData">addData</a>(&nbsp;SDR&nbsp;)&nbsp;with&nbsp;an&nbsp;SDR&nbsp;which&nbsp;has<br>
+these&nbsp;dimensions.<br>
+&nbsp;<br>
+Argument&nbsp;period&nbsp;is&nbsp;time&nbsp;constant&nbsp;for&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.ActivationFrequency-__str__">__str__</a>(self:&nbsp;htm.bindings.sdr.ActivationFrequency)&nbsp;-&gt;&nbsp;object</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-entropy"><strong>entropy</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.ActivationFrequency-entropy">entropy</a>(self:&nbsp;htm.bindings.sdr.ActivationFrequency)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Binary&nbsp;entropy&nbsp;is&nbsp;a&nbsp;measurement&nbsp;of&nbsp;information.&nbsp;&nbsp;It&nbsp;measures&nbsp;how&nbsp;well&nbsp;the<br>
+SDR&nbsp;utilizes&nbsp;its&nbsp;resources&nbsp;(bits).&nbsp;&nbsp;A&nbsp;low&nbsp;entropy&nbsp;indicates&nbsp;that&nbsp;many<br>
+bits&nbsp;in&nbsp;the&nbsp;SDR&nbsp;are&nbsp;under-utilized&nbsp;and&nbsp;do&nbsp;not&nbsp;transmit&nbsp;as&nbsp;much<br>
+information&nbsp;as&nbsp;they&nbsp;could.&nbsp;&nbsp;A&nbsp;high&nbsp;entropy&nbsp;indicates&nbsp;that&nbsp;the&nbsp;SDR<br>
+optimally&nbsp;utilizes&nbsp;its&nbsp;resources.&nbsp;&nbsp;The&nbsp;most&nbsp;optimal&nbsp;use&nbsp;of&nbsp;SDR&nbsp;resources<br>
+is&nbsp;when&nbsp;all&nbsp;bits&nbsp;have&nbsp;an&nbsp;equal&nbsp;activation&nbsp;frequency.&nbsp;&nbsp;For&nbsp;convenience,<br>
+the&nbsp;entropy&nbsp;is&nbsp;scaled&nbsp;by&nbsp;the&nbsp;theoretical&nbsp;maximum&nbsp;into&nbsp;the&nbsp;range&nbsp;[0,&nbsp;1].<br>
+&nbsp;<br>
+Returns&nbsp;binary&nbsp;entropy&nbsp;of&nbsp;SDR,&nbsp;scaled&nbsp;to&nbsp;range&nbsp;[0,&nbsp;1].</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-max"><strong>max</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.ActivationFrequency-max">max</a>(self:&nbsp;htm.bindings.sdr.ActivationFrequency)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Maximum&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-mean"><strong>mean</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.ActivationFrequency-mean">mean</a>(self:&nbsp;htm.bindings.sdr.ActivationFrequency)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Average&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-min"><strong>min</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.ActivationFrequency-min">min</a>(self:&nbsp;htm.bindings.sdr.ActivationFrequency)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Minimum&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd></dl>
+
+<dl><dt><a name="ActivationFrequency-std"><strong>std</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.ActivationFrequency-std">std</a>(self:&nbsp;htm.bindings.sdr.ActivationFrequency)&nbsp;-&gt;&nbsp;float<br>
+&nbsp;<br>
+Standard&nbsp;Deviation&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>activationFrequency</strong></dt>
+<dd><tt>Data&nbsp;Buffer&nbsp;of&nbsp;Activation&nbsp;Frequencies</tt></dd>
+</dl>
+<hr>
+Methods inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><a name="ActivationFrequency-addData"><strong>addData</strong></a>(...)</dt><dd><tt><a href="#htm.bindings.sdr.ActivationFrequency-addData">addData</a>(self:&nbsp;htm.bindings.sdr.MetricsHelper_,&nbsp;arg0:&nbsp;htm.bindings.sdr.SDR)&nbsp;-&gt;&nbsp;None<br>
+&nbsp;<br>
+Add&nbsp;an&nbsp;SDR&nbsp;datum&nbsp;to&nbsp;this&nbsp;Metric.&nbsp;&nbsp;This&nbsp;method&nbsp;can&nbsp;only&nbsp;be&nbsp;called&nbsp;if&nbsp;the<br>
+Metric&nbsp;was&nbsp;constructed&nbsp;with&nbsp;dimensions&nbsp;and&nbsp;NOT&nbsp;an&nbsp;SDR.<br>
+&nbsp;<br>
+Argument&nbsp;sdr&nbsp;is&nbsp;data&nbsp;source,&nbsp;its&nbsp;dimensions&nbsp;must&nbsp;be&nbsp;the&nbsp;same&nbsp;as&nbsp;this&nbsp;Metric's<br>
+dimensions.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="htm.bindings.sdr.html#MetricsHelper_">MetricsHelper_</a>:<br>
+<dl><dt><strong>dimensions</strong></dt>
+<dd><tt>Shape&nbsp;of&nbsp;the&nbsp;SDR&nbsp;data&nbsp;source.</tt></dd>
+</dl>
+<dl><dt><strong>period</strong></dt>
+<dd><tt>Time&nbsp;constant&nbsp;for&nbsp;the&nbsp;exponential&nbsp;moving&nbsp;average&nbsp;which&nbsp;incorporate&nbsp;data&nbsp;into<br>
+this&nbsp;measurement.&nbsp;&nbsp;If&nbsp;there&nbsp;are&nbsp;fewer&nbsp;data&nbsp;samples&nbsp;than&nbsp;the&nbsp;period&nbsp;then&nbsp;a&nbsp;regular<br>
+average&nbsp;is&nbsp;used&nbsp;instead&nbsp;of&nbsp;an&nbsp;exponential&nbsp;moving&nbsp;average.</tt></dd>
+</dl>
+<dl><dt><strong>samples</strong></dt>
+<dd><tt>Number&nbsp;of&nbsp;data&nbsp;samples&nbsp;received&nbsp;&amp;&nbsp;incorporated&nbsp;into&nbsp;this&nbsp;measurement.</tt></dd>
+</dl>
+<hr>
+Static methods inherited from pybind11_builtins.pybind11_object:<br>
+<dl><dt><a name="ActivationFrequency-__new__"><strong>__new__</strong></a>(*args, **kwargs)<font color="#909090"><font face="helvetica, arial"> from pybind11_builtins.pybind11_type</font></font></dt><dd><tt>Create&nbsp;and&nbsp;return&nbsp;a&nbsp;new&nbsp;object.&nbsp;&nbsp;See&nbsp;help(type)&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+</td></tr></table>
+</body></html>

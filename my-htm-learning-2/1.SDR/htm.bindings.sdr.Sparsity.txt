@@ -1,0 +1,105 @@
+Help on class Sparsity in htm.bindings.sdr:
+
+htm.bindings.sdr.Sparsity = class Sparsity(MetricsHelper_)
+ |  Measures the sparsity of an SDR.  This accumulates measurements using an
+ |  exponential moving average, and outputs a summary of results.
+ |  
+ |  Example Usage:
+ |      A = SDR( dimensions )
+ |      B = Sparsity( A, period = 1000 )
+ |      A.randomize( 0.01 )
+ |      A.randomize( 0.15 )
+ |      A.randomize( 0.05 )
+ |      B.sparsity ->  0.05
+ |      B.min()    ->  0.01
+ |      B.max()    ->  0.15
+ |      B.mean()   -> ~0.07
+ |      B.std()    -> ~0.06
+ |      str(B)     -> Sparsity Min/Mean/Std/Max 0.01 / 0.0700033 / 0.0588751 / 0.15
+ |  
+ |  Method resolution order:
+ |      Sparsity
+ |      MetricsHelper_
+ |      pybind11_builtins.pybind11_object
+ |      builtins.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(...)
+ |      __init__(*args, **kwargs)
+ |      Overloaded function.
+ |      
+ |      1. __init__(self: htm.bindings.sdr.Sparsity, sdr: htm.bindings.sdr.SDR, period: int) -> None
+ |      
+ |      Argument sdr is data source is to track.  Add data to this sparsity metric by
+ |      assigning to this SDR.
+ |      
+ |      Argument period is time constant for exponential moving average.
+ |      
+ |      2. __init__(self: htm.bindings.sdr.Sparsity, dimensions: List[int], period: int) -> None
+ |      
+ |      Argument dimensions of SDR.  Add data to this sparsity metric by calling method
+ |      sparsity.addData( SDR ) with an SDR which has these dimensions.
+ |      
+ |      Argument period is time constant for exponential moving average.
+ |  
+ |  __str__(...)
+ |      __str__(self: htm.bindings.sdr.Sparsity) -> object
+ |  
+ |  max(...)
+ |      max(self: htm.bindings.sdr.Sparsity) -> float
+ |      
+ |      Maximum Sparsity
+ |  
+ |  mean(...)
+ |      mean(self: htm.bindings.sdr.Sparsity) -> float
+ |      
+ |      Average of Sparsity
+ |  
+ |  min(...)
+ |      min(self: htm.bindings.sdr.Sparsity) -> float
+ |      
+ |      Minimum Sparsity
+ |  
+ |  std(...)
+ |      std(self: htm.bindings.sdr.Sparsity) -> float
+ |      
+ |      Standard Deviation of Sparsity
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  sparsity
+ |      Current Sparsity, or sparsity of most recently added SDR.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from MetricsHelper_:
+ |  
+ |  addData(...)
+ |      addData(self: htm.bindings.sdr.MetricsHelper_, arg0: htm.bindings.sdr.SDR) -> None
+ |      
+ |      Add an SDR datum to this Metric.  This method can only be called if the
+ |      Metric was constructed with dimensions and NOT an SDR.
+ |      
+ |      Argument sdr is data source, its dimensions must be the same as this Metric's
+ |      dimensions.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from MetricsHelper_:
+ |  
+ |  dimensions
+ |      Shape of the SDR data source.
+ |  
+ |  period
+ |      Time constant for the exponential moving average which incorporate data into
+ |      this measurement.  If there are fewer data samples than the period then a regular
+ |      average is used instead of an exponential moving average.
+ |  
+ |  samples
+ |      Number of data samples received & incorporated into this measurement.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods inherited from pybind11_builtins.pybind11_object:
+ |  
+ |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+ |      Create and return a new object.  See help(type) for accurate signature.

@@ -1,0 +1,84 @@
+Help on class Metrics in htm.bindings.sdr:
+
+htm.bindings.sdr.Metrics = class Metrics(pybind11_builtins.pybind11_object)
+ |  Measures an SDR.  This applies the following three metrics:
+ |       Sparsity
+ |       ActivationFrequency
+ |       Overlap
+ |  This accumulates measurements using an exponential moving average, and
+ |  outputs a summary of results.
+ |  
+ |  Example Usage:
+ |      A = SDR( dimensions = 2000 )
+ |      M = Metrics( A, period = 1000 )
+ |      A.randomize( 0.10 )
+ |      for i in range( 20 ):
+ |          A.addNoise( 0.55 )
+ |  
+ |      M.sparsity            -> Sparsity class instance
+ |      M.activationFrequency -> ActivationFrequency class instance
+ |      M.overlap             -> Overlap class instance
+ |      str(M) -> SDR( 2000 )
+ |                  Sparsity Min/Mean/Std/Max 0.1 / 0.1 / 0 / 0.1
+ |                  Activation Frequency Min/Mean/Std/Max 0 / 0.1 / 0.100464 / 0.666667
+ |                  Entropy 0.822222
+ |                  Overlap Min/Mean/Std/Max 0.45 / 0.45 / 0 / 0.45
+ |  
+ |  Method resolution order:
+ |      Metrics
+ |      pybind11_builtins.pybind11_object
+ |      builtins.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(...)
+ |      __init__(*args, **kwargs)
+ |      Overloaded function.
+ |      
+ |      1. __init__(self: htm.bindings.sdr.Metrics, sdr: htm.bindings.sdr.SDR, period: int) -> None
+ |      
+ |      Argument sdr is data source to track.  Add data to this Metrics instance
+ |      by assigning to this SDR.
+ |      
+ |      Argument period is time constant for exponential moving average.
+ |      
+ |      2. __init__(self: htm.bindings.sdr.Metrics, dimensions: List[int], period: int) -> None
+ |      
+ |      Argument dimensions of SDR.  Add data to this Metrics instance
+ |      by calling method metrics.addData( SDR ) with an SDR which has these dimensions.
+ |      
+ |      Argument period is time constant for exponential moving average.
+ |  
+ |  __str__(...)
+ |      __str__(self: htm.bindings.sdr.Metrics) -> object
+ |  
+ |  addData(...)
+ |      addData(self: htm.bindings.sdr.Metrics, sdr: htm.bindings.sdr.SDR) -> None
+ |      
+ |      Add an SDR datum to these Metrics.  This method can only be called if
+ |      Metrics was constructed with dimensions and NOT an SDR.
+ |      
+ |      Argument sdr is data source, its dimensions must be the same as this Metric's
+ |      dimensions.
+ |  
+ |  reset(...)
+ |      reset(self: htm.bindings.sdr.Metrics) -> None
+ |      
+ |      For use with time-series data sets.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  activationFrequency
+ |  
+ |  dimensions
+ |  
+ |  overlap
+ |  
+ |  sparsity
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods inherited from pybind11_builtins.pybind11_object:
+ |  
+ |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+ |      Create and return a new object.  See help(type) for accurate signature.
