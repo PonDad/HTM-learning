@@ -1,0 +1,80 @@
+Help on class DateEncoderParameters in htm.bindings.encoders:
+
+htm.bindings.encoders.DateEncoderParameters = class DateEncoderParameters(pybind11_builtins.pybind11_object)
+ |  The DateEncoderParameters structure is used to pass configuration parameters to 
+ |  the DateEncoder. These Six (6) members define the total number of bits in the output.
+ |      Members:  season, dayOfWeek, weekend, holiday, timeOfDay, customDays
+ |  
+ |  Each member is a separate attribute of a date/time that can be activated
+ |  by providing a width parameter and sometimes a radius parameter.
+ |  Each is implemented separately using a ScalarEncoder and the results
+ |  are concatinated together.
+ |  
+ |  The width attribute determines the number of bits to be used for each member.
+ |  and 0 means don't use.  The width is like a weighting to indicate the relitive importance
+ |  of this member to the overall data value.
+ |  
+ |  The radius attribute indicates the size of the bucket; the quantization size.
+ |  All values in the same bucket generate the same pattern.
+ |  
+ |  To avoid problems with leap year, consider a year to have 366 days.
+ |  The timestamp will be converted to components such as time and dst based on 
+ |  local timezone and location (see localtime()).
+ |  
+ |  Method resolution order:
+ |      DateEncoderParameters
+ |      pybind11_builtins.pybind11_object
+ |      builtins.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(...)
+ |      __init__(self: htm.bindings.encoders.DateEncoderParameters) -> None
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  custom_days
+ |      (vector of strings) The custom days list is a vector of strings. Each string can be something like "Monday" or "mon", or 
+ |      a list like "mon,wed,fri".
+ |  
+ |  custom_width
+ |      (int) How many bits to apply to custom days.  A way to custom encode specific groups of days of the week as a category.
+ |  
+ |  dayOfWeek_radius
+ |      (double) how many days in a bucket. Default is 1.0 days.
+ |  
+ |  dayOfWeek_width
+ |      how many bits to apply to day of week.
+ |  
+ |  holiday_dates
+ |      Each holiday is either [month, day] or [year, month, day].
+ |      The former will use the same month day every year eg: [12, 25] for Christmas.
+ |      The latter will be a one off holiday eg: [2018, 4, 1] for Easter Sunday 2018.
+ |  
+ |  holiday_width
+ |      How many bits to apply to a holiday attribute.
+ |  
+ |  season_radius
+ |      season_radius
+ |  
+ |  season_width
+ |      (int)how many bits to apply to season.
+ |  
+ |  timeOfDay_radius
+ |      (double) How many hrs are in a bucket. Default is every 4 hrs is a bucket.  Use 0.25f for 15min buckets, etc.
+ |  
+ |  timeOfDay_width
+ |      How many bits to apply to time-of-day attribute.
+ |  
+ |  verbose
+ |      (bool)when true, displays some debug info for each time member that is actuvated.
+ |  
+ |  weekend_width
+ |      How many bits to apply to the weekend attribute.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods inherited from pybind11_builtins.pybind11_object:
+ |  
+ |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+ |      Create and return a new object.  See help(type) for accurate signature.

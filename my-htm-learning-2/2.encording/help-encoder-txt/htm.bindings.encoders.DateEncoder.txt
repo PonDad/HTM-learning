@@ -1,0 +1,55 @@
+Help on class DateEncoder in htm.bindings.encoders:
+
+htm.bindings.encoders.DateEncoder = class DateEncoder(pybind11_builtins.pybind11_object)
+ |  * The DateEncoder encodes up to 6 attributes of a timestamp value into an array of 0's and 1's.
+ |  
+ |  The input is a timestamp which is unix date/time; an integral value representing the number of
+ |  seconds elapsed since 00:00 hours, Jan 1, 1970 UTC (the unix EPOCH).  Some platforms (unix and linux)
+ |  allow negitive numbers as the timestamp which allows time before EPOCH to be expressed.
+ |  However some platforms (windows) allow only positive numbers.  If the type time_t on your computer
+ |  is is 32bits then the timestamp will not allow dates after Jan 18, 2038. By default, on windows
+ |  it is 64bit but on some older 32bit linux machines time_t is 32bit. google "Y2K38".
+ |  
+ |  The output is an array containing 0's except for a contiguous block of 1's for each
+ |  attribute member. This is held in an SDR container although technically this is not
+ |  a sparse representation. It is normally passed to a SpatialPooler which will turn
+ |  this into a true sparse representation.
+ |  
+ |  Method resolution order:
+ |      DateEncoder
+ |      pybind11_builtins.pybind11_object
+ |      builtins.object
+ |  
+ |  Methods defined here:
+ |  
+ |  __init__(...)
+ |      __init__(self: htm.bindings.encoders.DateEncoder, arg0: htm.bindings.encoders.DateEncoderParameters) -> None
+ |  
+ |  encode(...)
+ |      encode(*args, **kwargs)
+ |      Overloaded function.
+ |      
+ |      1. encode(self: htm.bindings.encoders.DateEncoder, arg0: datetime.datetime) -> htm::SparseDistributedRepresentation
+ |      
+ |      Encodes a .py datetime.datetime into an SDR structure. 
+ |      
+ |      2. encode(self: htm.bindings.encoders.DateEncoder, arg0: datetime.datetime, arg1: htm::SparseDistributedRepresentation) -> htm::SparseDistributedRepresentation
+ |      
+ |      Encodes a .py datetime.datetime into an SDR structure.
+ |  
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |  
+ |  dimensions
+ |  
+ |  parameters
+ |      Contains the parameter structure which this encoder uses internally. All
+ |      fields are filled in.
+ |  
+ |  size
+ |  
+ |  ----------------------------------------------------------------------
+ |  Static methods inherited from pybind11_builtins.pybind11_object:
+ |  
+ |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+ |      Create and return a new object.  See help(type) for accurate signature.

@@ -1,0 +1,672 @@
+Help on module htm.bindings.encoders in htm.bindings.encoders:
+
+NAME
+    htm.bindings.encoders - Encoders convert values into sparse distributed representation.
+
+DESCRIPTION
+    There are several critical properties which all encoders must have:
+    
+        1) Semantic similarity:  Similar inputs should have high overlap.  Overlap
+        decreases smoothly as inputs become less similar.  Dissimilar inputs have
+        very low overlap so that the output representations are not easily confused.
+    
+        2) Stability:  The representation for an input does not change during the
+        lifetime of the encoder.
+    
+        3) Sparsity: The output SDR should have a similar sparsity for all inputs and
+        have enough active bits to handle noise and subsampling.
+    
+    Reference: https://arxiv.org/pdf/1602.05925.pdf
+    
+    
+    CategoryEncoders:
+    
+        To encode categories of input, make a ScalarEncoder or a Random Distributed
+    Scalar Encoder (RDSE), and set the parameter category=True.  Then enumerate your
+    categories into integers before encoding them.
+
+CLASSES
+    pybind11_builtins.pybind11_object(builtins.object)
+        DateEncoder
+        DateEncoderParameters
+        RDSE
+        RDSE_Parameters
+        ScalarEncoder
+        ScalarEncoderParameters
+        SimHashDocumentEncoder
+        SimHashDocumentEncoderParameters
+    
+    class DateEncoder(pybind11_builtins.pybind11_object)
+     |  * The DateEncoder encodes up to 6 attributes of a timestamp value into an array of 0's and 1's.
+     |  
+     |  The input is a timestamp which is unix date/time; an integral value representing the number of
+     |  seconds elapsed since 00:00 hours, Jan 1, 1970 UTC (the unix EPOCH).  Some platforms (unix and linux)
+     |  allow negitive numbers as the timestamp which allows time before EPOCH to be expressed.
+     |  However some platforms (windows) allow only positive numbers.  If the type time_t on your computer
+     |  is is 32bits then the timestamp will not allow dates after Jan 18, 2038. By default, on windows
+     |  it is 64bit but on some older 32bit linux machines time_t is 32bit. google "Y2K38".
+     |  
+     |  The output is an array containing 0's except for a contiguous block of 1's for each
+     |  attribute member. This is held in an SDR container although technically this is not
+     |  a sparse representation. It is normally passed to a SpatialPooler which will turn
+     |  this into a true sparse representation.
+     |  
+     |  Method resolution order:
+     |      DateEncoder
+     |      pybind11_builtins.pybind11_object
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(...)
+     |      __init__(self: htm.bindings.encoders.DateEncoder, arg0: htm.bindings.encoders.DateEncoderParameters) -> None
+     |  
+     |  encode(...)
+     |      encode(*args, **kwargs)
+     |      Overloaded function.
+     |      
+     |      1. encode(self: htm.bindings.encoders.DateEncoder, arg0: datetime.datetime) -> htm::SparseDistributedRepresentation
+     |      
+     |      Encodes a .py datetime.datetime into an SDR structure. 
+     |      
+     |      2. encode(self: htm.bindings.encoders.DateEncoder, arg0: datetime.datetime, arg1: htm::SparseDistributedRepresentation) -> htm::SparseDistributedRepresentation
+     |      
+     |      Encodes a .py datetime.datetime into an SDR structure.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  dimensions
+     |  
+     |  parameters
+     |      Contains the parameter structure which this encoder uses internally. All
+     |      fields are filled in.
+     |  
+     |  size
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from pybind11_builtins.pybind11_object:
+     |  
+     |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+     |      Create and return a new object.  See help(type) for accurate signature.
+    
+    class DateEncoderParameters(pybind11_builtins.pybind11_object)
+     |  The DateEncoderParameters structure is used to pass configuration parameters to 
+     |  the DateEncoder. These Six (6) members define the total number of bits in the output.
+     |      Members:  season, dayOfWeek, weekend, holiday, timeOfDay, customDays
+     |  
+     |  Each member is a separate attribute of a date/time that can be activated
+     |  by providing a width parameter and sometimes a radius parameter.
+     |  Each is implemented separately using a ScalarEncoder and the results
+     |  are concatinated together.
+     |  
+     |  The width attribute determines the number of bits to be used for each member.
+     |  and 0 means don't use.  The width is like a weighting to indicate the relitive importance
+     |  of this member to the overall data value.
+     |  
+     |  The radius attribute indicates the size of the bucket; the quantization size.
+     |  All values in the same bucket generate the same pattern.
+     |  
+     |  To avoid problems with leap year, consider a year to have 366 days.
+     |  The timestamp will be converted to components such as time and dst based on 
+     |  local timezone and location (see localtime()).
+     |  
+     |  Method resolution order:
+     |      DateEncoderParameters
+     |      pybind11_builtins.pybind11_object
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(...)
+     |      __init__(self: htm.bindings.encoders.DateEncoderParameters) -> None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  custom_days
+     |      (vector of strings) The custom days list is a vector of strings. Each string can be something like "Monday" or "mon", or 
+     |      a list like "mon,wed,fri".
+     |  
+     |  custom_width
+     |      (int) How many bits to apply to custom days.  A way to custom encode specific groups of days of the week as a category.
+     |  
+     |  dayOfWeek_radius
+     |      (double) how many days in a bucket. Default is 1.0 days.
+     |  
+     |  dayOfWeek_width
+     |      how many bits to apply to day of week.
+     |  
+     |  holiday_dates
+     |      Each holiday is either [month, day] or [year, month, day].
+     |      The former will use the same month day every year eg: [12, 25] for Christmas.
+     |      The latter will be a one off holiday eg: [2018, 4, 1] for Easter Sunday 2018.
+     |  
+     |  holiday_width
+     |      How many bits to apply to a holiday attribute.
+     |  
+     |  season_radius
+     |      season_radius
+     |  
+     |  season_width
+     |      (int)how many bits to apply to season.
+     |  
+     |  timeOfDay_radius
+     |      (double) How many hrs are in a bucket. Default is every 4 hrs is a bucket.  Use 0.25f for 15min buckets, etc.
+     |  
+     |  timeOfDay_width
+     |      How many bits to apply to time-of-day attribute.
+     |  
+     |  verbose
+     |      (bool)when true, displays some debug info for each time member that is actuvated.
+     |  
+     |  weekend_width
+     |      How many bits to apply to the weekend attribute.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from pybind11_builtins.pybind11_object:
+     |  
+     |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+     |      Create and return a new object.  See help(type) for accurate signature.
+    
+    class RDSE(pybind11_builtins.pybind11_object)
+     |  Encodes a real number as a set of randomly generated activations.
+     |  
+     |  The Random Distributed Scalar Encoder (RDSE) encodes a numeric scalar (floating
+     |  point) value into an SDR.  The RDSE is more flexible than the ScalarEncoder.
+     |  This encoder does not need to know the minimum and maximum of the input
+     |  range.  It does not assign an input->output mapping at construction.  Instead
+     |  the encoding is determined at runtime.
+     |  
+     |  Note: This implementation differs from Numenta's original RDSE.  The original
+     |  RDSE saved all associations between inputs and active bits for the lifetime
+     |  of the encoder.  This allowed it to guarantee a good set of random
+     |  activations which didn't conflict with any previous encoding.  It also allowed
+     |  the encoder to decode an SDR into the input value which likely created it.
+     |  This RDSE does not save the association between inputs and active bits.  This
+     |  is faster and uses less memory.  It relies on the random & distributed nature
+     |  of SDRs to prevent conflicts between different encodings.  This method does
+     |  not allow for decoding SDRs into the inputs which likely created it.
+     |  
+     |  To inspect this run:
+     |  $ python -m htm.examples.encoders.rdse --help
+     |  
+     |  Method resolution order:
+     |      RDSE
+     |      pybind11_builtins.pybind11_object
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __getstate__(...)
+     |      __getstate__(self: htm.bindings.encoders.RDSE) -> bytes
+     |  
+     |  __init__(...)
+     |      __init__(self: htm.bindings.encoders.RDSE, arg0: htm.bindings.encoders.RDSE_Parameters) -> None
+     |  
+     |  __setstate__(...)
+     |      __setstate__(self: htm.bindings.encoders.RDSE, arg0: bytes) -> None
+     |  
+     |  encode(...)
+     |      encode(*args, **kwargs)
+     |      Overloaded function.
+     |      
+     |      1. encode(self: htm.bindings.encoders.RDSE, arg0: float, arg1: htm::SparseDistributedRepresentation) -> None
+     |      
+     |      2. encode(self: htm.bindings.encoders.RDSE, arg0: float) -> htm::SparseDistributedRepresentation
+     |  
+     |  loadFromFile(...)
+     |      loadFromFile(self: htm.bindings.encoders.RDSE, arg0: str) -> None
+     |  
+     |  loadFromString(...)
+     |      loadFromString(self: htm.bindings.encoders.RDSE, arg0: bytes) -> None
+     |  
+     |  saveToFile(...)
+     |      saveToFile(self: htm.bindings.encoders.RDSE, arg0: str) -> None
+     |  
+     |  writeToString(...)
+     |      writeToString(self: htm.bindings.encoders.RDSE) -> bytes
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  dimensions
+     |  
+     |  parameters
+     |      Contains the parameter structure which this encoder uses internally. All
+     |      fields are filled in automatically.
+     |  
+     |  size
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from pybind11_builtins.pybind11_object:
+     |  
+     |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+     |      Create and return a new object.  See help(type) for accurate signature.
+    
+    class RDSE_Parameters(pybind11_builtins.pybind11_object)
+     |  Parameters for the RandomDistributedScalarEncoder (RDSE)
+     |  
+     |  Members "activeBits" & "sparsity" are mutually exclusive, specify exactly one
+     |  of them.
+     |  
+     |  Members "radius", "resolution", and "category" are mutually exclusive, specify
+     |  exactly one of them.
+     |  
+     |  Method resolution order:
+     |      RDSE_Parameters
+     |      pybind11_builtins.pybind11_object
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(...)
+     |      __init__(self: htm.bindings.encoders.RDSE_Parameters) -> None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  activeBits
+     |      Member "activeBits" is the number of true bits in the encoded output SDR.
+     |  
+     |  category
+     |      Member "category" means that the inputs are enumerated categories.
+     |      If true then this encoder will only encode unsigned integers, and all
+     |      inputs will have unique / non-overlapping representations.
+     |  
+     |  radius
+     |      Two inputs separated by more than the radius will have non-overlapping
+     |      representations. Two inputs separated by less than the radius will in general
+     |      overlap in at least some of their bits. You can think of this as the radius of
+     |      the input.
+     |  
+     |  resolution
+     |      Two inputs separated by greater than, or equal to the resolution are
+     |      guaranteed to have different representations.
+     |  
+     |  seed
+     |      Member "seed" forces different encoders to produce different outputs, even if
+     |      the inputs and all other parameters are the same.  Two encoders with the same
+     |      seed, parameters, and input will produce identical outputs.
+     |      
+     |      The seed 0 is special.  Seed 0 is replaced with a random number.
+     |  
+     |  size
+     |      Member "size" is the total number of bits in the encoded output SDR.
+     |  
+     |  sparsity
+     |      Member "sparsity" is the fraction of bits in the encoded output which this
+     |      encoder will activate. This is an alternative way to specify the member
+     |      "activeBits".
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from pybind11_builtins.pybind11_object:
+     |  
+     |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+     |      Create and return a new object.  See help(type) for accurate signature.
+    
+    class ScalarEncoder(pybind11_builtins.pybind11_object)
+     |  Encodes a real number as a contiguous block of 1's.
+     |  
+     |  The ScalarEncoder encodes a numeric (floating point) value into an array of
+     |  bits. The output is 0's except for a contiguous block of 1's. The location of
+     |  this contiguous block varies continuously with the input value.
+     |  
+     |  To inspect this run:
+     |  $ python -m htm.examples.encoders.scalar_encoder --help
+     |  
+     |  Method resolution order:
+     |      ScalarEncoder
+     |      pybind11_builtins.pybind11_object
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(...)
+     |      __init__(self: htm.bindings.encoders.ScalarEncoder, arg0: htm.bindings.encoders.ScalarEncoderParameters) -> None
+     |  
+     |  encode(...)
+     |      encode(*args, **kwargs)
+     |      Overloaded function.
+     |      
+     |      1. encode(self: htm.bindings.encoders.ScalarEncoder, arg0: float, arg1: htm::SparseDistributedRepresentation) -> None
+     |      
+     |      2. encode(self: htm.bindings.encoders.ScalarEncoder, arg0: float) -> htm::SparseDistributedRepresentation
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  dimensions
+     |  
+     |  parameters
+     |      Contains the parameter structure which this encoder uses internally. All
+     |      fields are filled in automatically.
+     |  
+     |  size
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from pybind11_builtins.pybind11_object:
+     |  
+     |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+     |      Create and return a new object.  See help(type) for accurate signature.
+    
+    class ScalarEncoderParameters(pybind11_builtins.pybind11_object)
+     |  The following four (4) members define the total number of bits in the output:
+     |       size,
+     |       radius,
+     |       category,
+     |       resolution.
+     |  
+     |  These are mutually exclusive and only one of them should be non-zero when
+     |  constructing the encoder.
+     |  
+     |  Method resolution order:
+     |      ScalarEncoderParameters
+     |      pybind11_builtins.pybind11_object
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(...)
+     |      __init__(self: htm.bindings.encoders.ScalarEncoderParameters) -> None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  activeBits
+     |      This is the number of true bits in the encoded output SDR. The output
+     |      encodings will have a contiguous block of this many 1's.
+     |  
+     |  category
+     |      This means that the inputs are enumerated categories.
+     |      If true then this encoder will only encode unsigned integers, and all inputs
+     |      will have unique / non-overlapping representations.
+     |  
+     |  clipInput
+     |      This determines whether to allow input values outside the
+     |      range [minimum, maximum].
+     |      If true, the input will be clipped into the range [minimum, maximum].
+     |      If false, inputs outside of the range will raise an error.
+     |  
+     |  maximum
+     |      This defines the range of the input signal. These endpoints are inclusive.
+     |  
+     |  minimum
+     |      This defines the range of the input signal. These endpoints are inclusive.
+     |  
+     |  periodic
+     |      This controls what happens near the edges of the input range.
+     |      
+     |      If true, then the minimum & maximum input values are adjacent and the first and
+     |      last bits of the output SDR are also adjacent.  The contiguous block of 1's
+     |      wraps around the end back to the beginning.
+     |      
+     |      If false, then minimum & maximum input values are the endpoints of the input
+     |      range, are not adjacent, and activity does not wrap around.
+     |  
+     |  radius
+     |      Two inputs separated by more than the radius have non-overlapping
+     |      representations. Two inputs separated by less than the radius will in general
+     |      overlap in at least some of their bits. You can think of this as the radius of
+     |      the input.
+     |  
+     |  resolution
+     |      Two inputs separated by greater than, or equal to the resolution are guaranteed
+     |      to have different representations.
+     |  
+     |  size
+     |      This is the total number of bits in the encoded output SDR.
+     |  
+     |  sparsity
+     |      This is an alternative way to specify the the number of active bits.
+     |      Sparsity requires that the size to also be specified.
+     |      Specify only one of: activeBits or sparsity.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from pybind11_builtins.pybind11_object:
+     |  
+     |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+     |      Create and return a new object.  See help(type) for accurate signature.
+    
+    class SimHashDocumentEncoder(pybind11_builtins.pybind11_object)
+     |  Encodes a document text into a distributed spray of 1's.
+     |  
+     |  The SimHashDocumentEncoder encodes a document (array of strings) value into an
+     |  array of bits. The output is 0's except for a sparse distribution spray of 1's.
+     |  Similar document encodings will share similar representations, and vice versa.
+     |  Unicode is supported. No lookup tables are used.
+     |  
+     |  "Similarity" here refers to bitwise similarity (small hamming distance,
+     |  high overlap), not semantic similarity (encodings for "apple" and
+     |  "computer" will have no relation here.) For document encodings which are
+     |  also semantic, please try Cortical.io and their Semantic Folding tech.
+     |  
+     |  Definition of Terms:
+     |    - A "corpus" is a collection of "documents".
+     |    - A "document" is made up of "tokens" (or "words").
+     |    - A "token" is made up of "characters" (or "letters").
+     |  
+     |  For details on the SimHash Algorithm itself, please see source code file:
+     |    - SimHashDocumentEncoder.README.md
+     |  
+     |  To inspect this run:
+     |  $ python -m htm.examples.encoders.simhash_document_encoder --help
+     |  
+     |  Python Code Example:
+     |      from htm.bindings.encoders import SimHashDocumentEncoder
+     |      from htm.bindings.encoders import SimHashDocumentEncoderParameters
+     |      from htm.bindings.sdr import SDR
+     |  
+     |      params = SimHashDocumentEncoderParameters()
+     |      params.size = 400
+     |      params.activeBits = 21
+     |  
+     |      output = SDR(params.size)
+     |      encoder = SimHashDocumentEncoder(params)
+     |  
+     |      # call style: output is reference
+     |      encoder.encode([ "bravo", "delta", "echo" ], output)
+     |      encoder.encode("bravo delta echo", output)
+     |  
+     |      # call style: output is returned
+     |      other = encoder.encode([ "bravo", "delta", "echo" ])
+     |      other = encoder.encode("bravo delta echo")
+     |  
+     |  Method resolution order:
+     |      SimHashDocumentEncoder
+     |      pybind11_builtins.pybind11_object
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __getstate__(...)
+     |      __getstate__(self: htm.bindings.encoders.SimHashDocumentEncoder) -> bytes
+     |  
+     |  __init__(...)
+     |      __init__(self: htm.bindings.encoders.SimHashDocumentEncoder, arg0: htm.bindings.encoders.SimHashDocumentEncoderParameters) -> None
+     |  
+     |  __setstate__(...)
+     |      __setstate__(self: htm.bindings.encoders.SimHashDocumentEncoder, arg0: bytes) -> None
+     |      
+     |      
+     |      De/Serialize with Python Pickle.
+     |  
+     |  encode(...)
+     |      encode(*args, **kwargs)
+     |      Overloaded function.
+     |      
+     |      1. encode(self: htm.bindings.encoders.SimHashDocumentEncoder, arg0: str, arg1: htm::SparseDistributedRepresentation) -> None
+     |      
+     |      2. encode(self: htm.bindings.encoders.SimHashDocumentEncoder, arg0: List[str], arg1: htm::SparseDistributedRepresentation) -> None
+     |      
+     |      3. encode(self: htm.bindings.encoders.SimHashDocumentEncoder, arg0: str) -> htm::SparseDistributedRepresentation
+     |      
+     |      
+     |      Encode (Alternate calling style: Simple string method).
+     |      Simple alternate calling pattern using only a single longer string. Takes input
+     |      as a long python string, which will automatically be tokenized (split on
+     |      whitespace). Ex: "alpha bravo delta echo".
+     |      
+     |      
+     |      4. encode(self: htm.bindings.encoders.SimHashDocumentEncoder, arg0: List[str]) -> htm::SparseDistributedRepresentation
+     |      
+     |      
+     |      Encode (Main calling style).
+     |      Each token will be hashed with SHA3+SHAKE256 to get a binary digest output of
+     |      desired `size`. These vectors will be stored in a matrix for the next step of
+     |      processing. Weights from the `vocabulary` are added in during hashing and
+     |      simhashing. After the loop, we SimHash the matrix of hashes, resulting in an
+     |      output SDR. If param "tokenSimilarity" is set, we'll also loop and hash through
+     |      all the letters in the tokens. Takes input in a python list of
+     |      strings (tokens).
+     |        Ex: [ "alpha", "bravo", "delta", "echo" ].
+     |      Documents can contain any number of tokens > 0. Token order in the document is
+     |        ignored and does not effect the output encoding. Tokens in the `vocabulary`
+     |        will be weighted, while others may be encoded depending on the
+     |        `encodeOrphans` param. Tokens in the `exclude` list will always be discarded.
+     |  
+     |  loadFromFile(...)
+     |      loadFromFile(self: htm.bindings.encoders.SimHashDocumentEncoder, arg0: str) -> None
+     |      
+     |      
+     |      Deserialize file contents into current object.
+     |  
+     |  loadFromString(...)
+     |      loadFromString(self: htm.bindings.encoders.SimHashDocumentEncoder, arg0: bytes) -> None
+     |      
+     |      
+     |      Deserialize bytestring into current object.
+     |  
+     |  saveToFile(...)
+     |      saveToFile(self: htm.bindings.encoders.SimHashDocumentEncoder, arg0: str) -> None
+     |      
+     |      
+     |      Serialize current encoder instance out to a file.
+     |  
+     |  writeToString(...)
+     |      writeToString(self: htm.bindings.encoders.SimHashDocumentEncoder) -> bytes
+     |      
+     |      
+     |      Serialize current encoder instance out to a bytestring.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  dimensions
+     |      This is the total number of bits in the encoded output SDR.
+     |  
+     |  parameters
+     |      Contains the parameter structure which this encoder uses internally. All fields
+     |      are filled in automatically.
+     |  
+     |  size
+     |      This is the total number of bits in the encoded output SDR.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from pybind11_builtins.pybind11_object:
+     |  
+     |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+     |      Create and return a new object.  See help(type) for accurate signature.
+    
+    class SimHashDocumentEncoderParameters(pybind11_builtins.pybind11_object)
+     |  Parameters for the SimHashDocumentEncoder.
+     |  
+     |  Method resolution order:
+     |      SimHashDocumentEncoderParameters
+     |      pybind11_builtins.pybind11_object
+     |      builtins.object
+     |  
+     |  Methods defined here:
+     |  
+     |  __init__(...)
+     |      __init__(self: htm.bindings.encoders.SimHashDocumentEncoderParameters) -> None
+     |  
+     |  ----------------------------------------------------------------------
+     |  Data descriptors defined here:
+     |  
+     |  activeBits
+     |      This is the number of true bits in the encoded output SDR. The output encoding
+     |      will have a distribution of this many 1's. Specify only one of: activeBits
+     |      or sparsity.
+     |  
+     |  caseSensitivity
+     |      Should capitalized English letters (A-Z) have different influence on our output
+     |      than their lower-cased (a-z) counterparts? Or the same influence on output?
+     |        If TRUE:  "DOGS" and "dogs" will have completely different encodings.
+     |        If FALSE: "DOGS" and "dogs" will share the same encoding (Default).
+     |  
+     |  encodeOrphans
+     |      If param `vocabulary` is set, should we `encode()` tokens not in our
+     |      `vocabulary` ("orphan" tokens)?
+     |        If True: Unrecognized tokens will be added to our encoding
+     |          with weight=1. Our `vocabulary` is useful as a simple weight map.
+     |        If False (default): Unrecognized tokens will be discarded. Our `vocabulary`
+     |          now serves more like a whitelist (also with weights).
+     |        Any tokens in the `exclude` list will be discarded.
+     |  
+     |  excludes
+     |      List of tokens to discard when passed in to `encode()`. Terms in the
+     |      `vocabulary`, and orphan terms, will be ignored if excluded here. If
+     |      `tokenSimilarity` is enabled, you can also pass in single character (letter)
+     |      strings to discard.
+     |  
+     |  frequencyCeiling
+     |      The max number of times a token can be repeated in a document. Occurances of
+     |      the token beyond this number will be discarded. A setting of 1 will act as
+     |      token de-duplication, guaranteeing each token in a document is unique. Inverse
+     |      to param `frequencyFloor`.
+     |        If param `tokenSimilarity` is on, this will be the max number of times a
+     |        char/letter can be repeated in a token. Occurances of the character beyond
+     |        this number will be discarded. A setting of 1 will act as character
+     |        de-duplication, guaranteeing each character in a token is unique.
+     |  
+     |  frequencyFloor
+     |      If this option is set, a token will be ignored until it occurs this many times
+     |      in the document. Occurances of the token before this number will be discarded.
+     |      Inverse to param `frequencyCeiling`.
+     |  
+     |  size
+     |      This is the total number of bits in the encoded output SDR.
+     |  
+     |  sparsity
+     |      This is an alternate way (percentage) to specify the the number of active bits.
+     |      Specify only one of: activeBits or sparsity.
+     |  
+     |  tokenSimilarity
+     |      This allows similar tokens ("cat", "cats") to also be represented similarly,
+     |      at the cost of document similarity accuracy. Default is FALSE (providing better
+     |      document-level similarity, at the expense of token-level similarity). This
+     |      could be use to meaningfully encode plurals and mis-spellings as similar. It
+     |      may also be hacked to create a complex dimensional category encoder. Results
+     |      are heavily dependent on the content of your input data.
+     |        If TRUE: Similar tokens ("cat", "cats") will have similar influence on the
+     |          output simhash. This benefit comes with the cost of a reduction in
+     |          document-level similarity accuracy. Param `frequencyCeiling` is also
+     |          available for use with this.
+     |        If FALSE: Similar tokens ("cat", "cats") will have individually unique and
+     |          unrelated influence on the output simhash encoding, thus losing token-level
+     |          similarity and increasing document-level similarity.
+     |  
+     |  vocabulary
+     |      Map of possible document tokens with weights.
+     |          ex: {{ "what", 3 }, { "is", 1 }, { "up", 2 }}.
+     |        If `encodeOrphans` is True, this will be useful like a simple weight
+     |          map. If `encodeOrphans` is False, this will be more useful as a
+     |          whitelist (still with weights).
+     |        If `tokenSimilarity` is enabled, you can also pass in single
+     |          character (letter) strings to weight.
+     |        Any tokens in the `exclude` list will be discarded.
+     |  
+     |  ----------------------------------------------------------------------
+     |  Static methods inherited from pybind11_builtins.pybind11_object:
+     |  
+     |  __new__(*args, **kwargs) from pybind11_builtins.pybind11_type
+     |      Create and return a new object.  See help(type) for accurate signature.
+
+FILE
+    /usr/local/lib/python3.7/site-packages/htm.core-2.1.1-py3.7-macosx-10.14-x86_64.egg/htm/bindings/encoders.cpython-37m-darwin.so
+
+
+No Python documentation found for 'RDSE_Parameters'.
+Use help() to get the interactive help utility.
+Use help(str) for help on the str class.
